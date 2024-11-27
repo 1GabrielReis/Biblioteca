@@ -9,7 +9,15 @@ ativo= True
 alunoDao= DaoFactory.createAlunoDao()
 
 def insert():
-    pass
+    print('Teste insert')
+    nome=input("Nome do aluno: ")
+    sobrenome=input("Sobrenome do aluno: ")
+    aluno=Aluno(nome=nome, sobrenome=sobrenome,id=None)
+    alunoDao.insert(aluno)
+    print("Aluno cadastrado com sucesso")
+    print(aluno)
+
+
  
 def update():
     print('Teste update')
