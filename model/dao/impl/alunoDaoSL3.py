@@ -22,6 +22,10 @@ class AlunoDaoSL3(AlunoDao):
                 (nome,sobrenome)
             )
             self.conn.commit()
+            if cursor.rowcount > 0:
+                aluno.id=cursor.lastrowid
+            else:
+                raise DbException(f"Erro, não foi possivel inserir os dados")
         except sql.Error as erro:
             raise DbException(f"Erro ao cadastrar aluno. \nDetalhes: {erro}")
         finally:
