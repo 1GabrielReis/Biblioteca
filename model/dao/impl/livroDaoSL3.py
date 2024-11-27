@@ -22,6 +22,10 @@ class LivroDaoSL3(AlunoDao):
                 (titulo,autor,editora)
             )
             self.conn.commit()
+            if cursor.rowcount > 0:
+                livro.id=cursor.lastrowid
+            else:
+                raise DbException(f"Erro, não foi possivel inserir os dados")
         except sql.Error as erro:
             raise DbException(f"Erro ao cadastrar livro. \nDetalhes: {erro}")
         finally:
@@ -32,28 +36,70 @@ class LivroDaoSL3(AlunoDao):
         cursor=None
         try:
             id_livro, titulo, autor, editora = vars(livro).values()
-            cursosr= self.conn.cursosr()
+            cursor= self.conn.cursosr()
             cursor.execute('''
                             UPDATE livros
                             SET titulo= ?, autor= ?, editora= ?
-                            WHERE id = ? ''',(titulo,autor,editora,id_livro))
+                            WHERE id_livro = ? ''',(titulo,autor,editora,id_livro))
             self.conn.commit()
         except sql.Error as erro:
             raise DbException(f"Erro ao atualizar livro. \nDetalhes: {erro}")
         finally:
-            DB.closeCursor(cursosr)
+            DB.closeCursor(cursor)
             
 
 
 
     
     def deleteById(self,id: int):
-        pass
+        cursor=None
+        try:
+            cursor=self.conn.cursosr
+            cursor.execute("DELETE FROM livros WHERE  id_livro = ?",(id,))
+            self.conn.commit()
+            if cursor.rowcount == 0:
+                raise DbException(f"ID não encontrado")
+        except sql.Error as erro:
+            raise DbException(f"Erro ao atualizar livro. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
+              
 
     
     def findById(self,id: int):
-        pass
+        cursor= None
+        try:
+            cursor= self.conn.cursos()
+            cursor.execute("SELECT * FROM livros WHERE id_livro = ? ",(id,))
+            resultSet= cursor.fetchone()
+            if resultSet is not None:
+                livro=self._instaciaLivro(resultSet)
+                return livro
+            else:
+                return None
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar aluno. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     
     def findAll(self,livro: List[Livro]):
-        pass
+        cursor=None
+        try:
+            cursor= self.conn.cursor()
+            cursor.executte("SELECT * FROM livros")
+            resultSetList=cursor.fetchall()
+            if resultSetList:
+               return [self._instaciaLivro(resultSet) for resultSet in resultSetList] 
+            return None
+
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar todos os livros. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
+
+
+
+    def _instaciaLivro(self,resultSet) -> Livro:
+        livro= Livro(resultSet[0],resultSet[1],resultSet[2],resultSet[3])
+        return livro
