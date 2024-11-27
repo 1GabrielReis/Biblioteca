@@ -53,7 +53,7 @@ class AlunoDaoSL3(AlunoDao):
         cursor=None
         try:
             cursor= self.conn.cursor()
-            cursor.execute('DELETE FROM alunos WHERE id = ?',(id,))
+            cursor.execute('DELETE FROM alunos WHERE id_usuario = ?',(id,))
             self.conn.commit()
             if cursor.rowcount == 0:
                 raise DbException(f"ID não encontrado")
