@@ -20,7 +20,25 @@ def insert():
     print(livro)
 
 def update():
-    pass
+    print('Teste update')
+    id_livro=int(input("Id do livro: "))
+    livro: Livro= livroDao.findById(id_livro)
+    atributo=int(input("""
+                   Qual atributo você desja alterar:
+                   1- titulo
+                   2- autor 
+                   3- editora 
+                   """))
+    if atributo == 1:
+        livro.titutlo= input("Qual o nome do livro: ")
+    elif atributo == 2:
+        livro.autor= input("Qual o nome do autor do livro: ")
+    else:
+        livro.editora= input("Qual a ditora do livro: ")
+    livroDao.update(livro)
+    print(livro)
+
+    
 
 def deleteById():
     pass
