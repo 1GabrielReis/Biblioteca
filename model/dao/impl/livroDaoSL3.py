@@ -9,7 +9,7 @@ from db.dbException import DbException
 class LivroDaoSL3(AlunoDao):
     def __init__(self,conn):
         super().__init__()
-        self.conn
+        self.conn= conn
     
     def insert(self,livro: Livro):
         cursor= None
