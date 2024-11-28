@@ -38,9 +38,14 @@ def update():
     livroDao.update(livro)
     print(livro)
 
-    
+
+
 
 def deleteById():
+    print('Teste find By Id')
+    id_livro=int(input("Id do livro: "))
+    livroDao.deleteById(id_livro)
+    print('Delete realizado com sucesso! ')
     pass
 
 def findById():

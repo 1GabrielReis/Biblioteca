@@ -51,15 +51,15 @@ class LivroDaoSL3(LivroDao):
     def deleteById(self,id: int):
         cursor=None
         try:
-            cursor=self.conn.cursosr
-            cursor.execute("DELETE FROM livros WHERE  id_livro = ?",(id,))
+            cursor= self.conn.cursor()
+            cursor.execute('DELETE FROM livros WHERE id_livro = ?', (id,))
             self.conn.commit()
             if cursor.rowcount == 0:
                 raise DbException(f"ID não encontrado")
         except sql.Error as erro:
-            raise DbException(f"Erro ao atualizar livro. \nDetalhes: {erro}")
+            raise DbException(f"Erro ao deletar livro. \n Detalhes: {erro}")
         finally:
-            DB.closeCursor(cursor)
+            DB.closeCursor(cursor)  
               
 
     def findById(self,id: int):
