@@ -1,8 +1,9 @@
+
 from abc import ABC, abstractmethod
 from typing import List
 
-from model.entities.livro import Livro
 from model.dao.daoFactory import DaoFactory
+from model.entities.livro import Livro
 from model.dao.livroDao import LivroDao
 
 ativo= True
@@ -21,7 +22,9 @@ def findById():
     pass
 
 def findAll():
-    pass
+    print('Teste find all')
+    alunos: List[Livro] = livroDao.findAll()
+    print(alunos)
 
 
 def escolha():

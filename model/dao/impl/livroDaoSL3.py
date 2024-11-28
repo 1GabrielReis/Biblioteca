@@ -1,12 +1,12 @@
 from typing import List
 import sqlite3 as sql
 
-from entities.livro import Livro
-from alunoDao import AlunoDao
+from model.entities.livro import Livro
+from model.dao.livroDao import LivroDao
 from db.db import DB
 from db.dbException import DbException
 
-class LivroDaoSL3(AlunoDao):
+class LivroDaoSL3(LivroDao):
     def __init__(self,conn):
         super().__init__()
         self.conn= conn
