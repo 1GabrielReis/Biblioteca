@@ -10,4 +10,6 @@ class Livro:
         return f"({self.id},{self.titutlo},{self.autor},{self.editora})"
 
     def __repr__(self) -> str:
-        self.__str__()
+        return self.__str__()
+
+    

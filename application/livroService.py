@@ -23,8 +23,8 @@ def findById():
 
 def findAll():
     print('Teste find all')
-    alunos: List[Livro] = livroDao.findAll()
-    print(alunos)
+    livros: list[Livro] = livroDao.findAll()
+    print(livros)
 
 
 def escolha():

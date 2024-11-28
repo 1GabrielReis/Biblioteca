@@ -48,9 +48,6 @@ class LivroDaoSL3(LivroDao):
             DB.closeCursor(cursor)
             
 
-
-
-    
     def deleteById(self,id: int):
         cursor=None
         try:
@@ -65,8 +62,7 @@ class LivroDaoSL3(LivroDao):
             DB.closeCursor(cursor)
               
 
-    
-    def findById(self,id: int):
+    def findById(self,id: int) -> Livro:
         cursor= None
         try:
             cursor= self.conn.cursos()
@@ -83,11 +79,11 @@ class LivroDaoSL3(LivroDao):
             DB.closeCursor(cursor)
 
     
-    def findAll(self,livro: List[Livro]):
+    def findAll(self)-> List[Livro]:
         cursor=None
         try:
             cursor= self.conn.cursor()
-            cursor.executte("SELECT * FROM livros")
+            cursor.execute("SELECT * FROM livros")
             resultSetList=cursor.fetchall()
             if resultSetList:
                return [self._instaciaLivro(resultSet) for resultSet in resultSetList] 
