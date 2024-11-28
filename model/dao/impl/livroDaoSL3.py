@@ -36,7 +36,7 @@ class LivroDaoSL3(LivroDao):
         cursor=None
         try:
             id_livro, titulo, autor, editora = vars(livro).values()
-            cursor= self.conn.cursosr()
+            cursor= self.conn.cursor()
             cursor.execute('''
                             UPDATE livros
                             SET titulo= ?, autor= ?, editora= ?

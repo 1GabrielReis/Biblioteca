@@ -10,7 +10,14 @@ ativo= True
 livroDao= DaoFactory.createLivroDao()
 
 def insert():
-    pass
+    print('Teste insert')
+    titulo=input("Titulo o livro: ")
+    autor=input("Autor do livro: ")
+    editora=input("Editora do livro: ")
+    livro= Livro(None,titulo, autor,editora)
+    livroDao.insert(livro)
+    print("Inserido! novo Id: ", livro.id)
+    print(livro)
 
 def update():
     pass
