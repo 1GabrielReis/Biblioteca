@@ -62,10 +62,10 @@ class LivroDaoSL3(LivroDao):
             DB.closeCursor(cursor)
               
 
-    def findById(self,id: int) -> Livro:
+    def findById(self,id: int):
         cursor= None
         try:
-            cursor= self.conn.cursos()
+            cursor= self.conn.cursor()
             cursor.execute("SELECT * FROM livros WHERE id_livro = ? ",(id,))
             resultSet= cursor.fetchone()
             if resultSet is not None:

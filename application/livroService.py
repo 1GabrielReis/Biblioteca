@@ -19,7 +19,10 @@ def deleteById():
     pass
 
 def findById():
-    pass
+    print('Teste find By Id')
+    id_livro=int(input("Id do livro: "))
+    livro: Livro= livroDao.findById(id_livro)
+    print(livro)
 
 def findAll():
     print('Teste find all')
