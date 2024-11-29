@@ -3,7 +3,7 @@ from typing import List
 
 from ..entities.biblioteca import Biblioteca
 
-class Biblioteca_Dao(ABC):
+class BibliotecaDao(ABC):
 
     @abstractmethod
     def insert(self,biblioteca: Biblioteca):
