@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from ..entities.biblioteca import Biblioteca
+from model.entities.biblioteca import Biblioteca
+from model.entities.aluno import Aluno
 
 class BibliotecaDao(ABC):
 
@@ -23,4 +24,8 @@ class BibliotecaDao(ABC):
 
     @abstractmethod
     def findAll(self,biblioteca: List[Biblioteca]):
+        pass
+
+    @abstractmethod
+    def findByAluno(self, aluno: Aluno) -> List[Aluno]:
         pass

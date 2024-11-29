@@ -3,6 +3,9 @@ import sqlite3
 
 from model.entities.biblioteca import Biblioteca
 from model.dao.bibliotecaDao import BibliotecaDao
+
+from model.entities.aluno import Aluno
+
 from db.db import DB
 from db.dbException import DbException
 
