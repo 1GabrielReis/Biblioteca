@@ -11,4 +11,4 @@ class DaoFactory:
         return LivroDaoSL3(DB.getConn())
     
     def createBibliotecaDao():
-        return BibliotecaDaoSL3(DB.getConn)
+        return BibliotecaDaoSL3(DB.getConn())

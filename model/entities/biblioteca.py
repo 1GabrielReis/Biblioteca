@@ -14,7 +14,7 @@ class Biblioteca:
         return total/len(notas)
     
     def __str__(self) -> str:
-        return f"({self.id}, {self.nota}, {self.aluno.id}, {self.aluno.nome})"
+        return f"({self.id}, {self.nota}, {self.aluno.id}, {self.aluno.nome})\n"
     
     def __repr__(self) -> str:
         return self.__str__()

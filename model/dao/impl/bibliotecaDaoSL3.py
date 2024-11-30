@@ -11,9 +11,9 @@ from db.dbException import DbException
 
 class BibliotecaDaoSL3(BibliotecaDao):
     
-    def __init__(self,conn):
+    def __init__(self,conn): #conn = DB
         super().__init__()
-        self.conn= conn
+        self.conn=conn
 
     def insert(self,biblioteca: Biblioteca):
         pass
@@ -31,10 +31,10 @@ class BibliotecaDaoSL3(BibliotecaDao):
         pass
 
    
-    def findAll(self,biblioteca: List[Biblioteca]):
+    def findAll(self) -> List[Biblioteca]:
         cursor= None
         try:
-            cursor=self.conn.cursor()
+            cursor= self.conn.cursor()
             cursor.execute('''
                             SELECT avaliar_biblioteca.*, alunos.*
                             FROM avaliar_biblioteca

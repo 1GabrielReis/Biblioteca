@@ -24,7 +24,9 @@ def findById():
     pass
 
 def findAll():
-    pass
+    print('Teste find all')
+    biblioteca= bibliotecaDao.findAll()
+    print(biblioteca)
 
 def findByAluno():
     pass
