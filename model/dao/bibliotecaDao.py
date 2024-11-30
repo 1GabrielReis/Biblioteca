@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from model.entities.biblioteca import Biblioteca
-from model.entities.aluno import Aluno
+from ..entities.biblioteca import Biblioteca
+from ..entities.aluno import Aluno
 
 class BibliotecaDao(ABC):
 

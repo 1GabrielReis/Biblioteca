@@ -1,7 +1,6 @@
 from typing import List
 
-from .aluno import Aluno
-from .biblioteca import Biblioteca
+from model.entities.aluno import Aluno
 
 class Biblioteca:
     def __init__(self,id,nota,aluno: Aluno):
@@ -9,9 +8,16 @@ class Biblioteca:
         self.nota=nota
         self.aluno= aluno 
 
-    def media(self, notas: List[Biblioteca]):
+    @staticmethod
+    def media(notas: List['Biblioteca']) -> float:
         total= sum(nota.nota for nota in notas)
         return total/len(notas)
+    
+    def __str__(self) -> str:
+        return f"({self.id}, {self.nota}, {self.aluno.id}, {self.aluno.nome})"
+    
+    def __repr__(self) -> str:
+        return self.__str__()
     
    
 
