@@ -11,7 +11,7 @@ from db.dbException import DbException
 
 class BibliotecaDaoSL3(BibliotecaDao):
     
-    def __init__(self,conn): #conn = DB
+    def __init__(self,conn): 
         super().__init__()
         self.conn=conn
 
@@ -28,7 +28,27 @@ class BibliotecaDaoSL3(BibliotecaDao):
 
    
     def findById(self,id: int):
-        pass
+        cursor= None
+        try:
+            cursor=self.conn.cursor()
+            cursor.execute('''
+                            SELECT 
+                            avaliar_biblioteca.id_biblioteca, avaliar_biblioteca.nota, avaliar_biblioteca.id_aluno,
+                            alunos.id_usuario, alunos.nome, alunos.sobrenome  
+                            FROM avaliar_biblioteca
+                            INNER JOIN alunos
+                            ON avaliar_biblioteca.id_aluno = alunos.id_usuario
+                            WHERE id_biblioteca = ?
+                           ''',(id,))
+            resultSet= cursor.fetchone()
+            if resultSet is not None:
+                aluno=self._instanciaAluno(resultSet)
+                return self._instanciaBiblioteca(resultSet,aluno)
+            return None
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar aluno. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
    
     def findAll(self) -> List[Biblioteca]:
@@ -36,7 +56,9 @@ class BibliotecaDaoSL3(BibliotecaDao):
         try:
             cursor= self.conn.cursor()
             cursor.execute('''
-                            SELECT avaliar_biblioteca.*, alunos.*
+                            SELECT 
+                            avaliar_biblioteca.id_biblioteca, avaliar_biblioteca.nota, avaliar_biblioteca.id_aluno,
+                            alunos.id_usuario, alunos.nome, alunos.sobrenome  
                             FROM avaliar_biblioteca
                             INNER JOIN  alunos
                             ON avaliar_biblioteca.id_aluno = alunos.id_usuario  
@@ -56,7 +78,7 @@ class BibliotecaDaoSL3(BibliotecaDao):
             DB.closeCursor(cursor)
 
 
-    def findByAluno(self, aluno: Aluno) -> List[Aluno]:
+    def findByAluno(self) -> List[Aluno]:
         pass
 
 
@@ -65,5 +87,5 @@ class BibliotecaDaoSL3(BibliotecaDao):
         return Biblioteca(id_biblioteca,nota,aluno)
 
     def _instanciaAluno(self,resultSet) -> Aluno:
-        id_aluno,nome, sobrenome= resultSet[3], resultSet[4], resultSet[5]
+        id_aluno, nome, sobrenome= resultSet[3], resultSet[4], resultSet[5]
         return Aluno(id_aluno, nome, sobrenome)

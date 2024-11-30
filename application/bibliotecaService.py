@@ -21,7 +21,11 @@ def deleteById():
     pass
 
 def findById():
-    pass
+    print('Teste find By Id')
+    id_biblioteca=int(input('Qual o id da avaliação: '))
+    biblioteca= bibliotecaDao.findById(id_biblioteca)
+    print(biblioteca)
+
 
 def findAll():
     print('Teste find all')

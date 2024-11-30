@@ -12,7 +12,7 @@ def insert():
     print('Teste insert')
     nome=input("Nome do aluno: ")
     sobrenome=input("Sobrenome do aluno: ")
-    aluno=Aluno(nome=nome, sobrenome=sobrenome)
+    aluno=Aluno(id= None,nome=nome, sobrenome=sobrenome)
     alunoDao.insert(aluno)
     print("Inserido! novo Id: ", aluno.id)
     print(aluno)
