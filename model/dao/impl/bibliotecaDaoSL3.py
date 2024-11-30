@@ -36,12 +36,20 @@ class BibliotecaDaoSL3(BibliotecaDao):
         try:
             cursor=self.conn.cursor()
             cursor.execute('''
-                            SELECT    avaliar_biblioteca.*  AS biblioteca, alunos.*
+                            SELECT avaliar_biblioteca.*, alunos.*
                             FROM avaliar_biblioteca
                             INNER JOIN  alunos
-                            ON biblioteca.id_aluno = alunos.id_usuario  
+                            ON avaliar_biblioteca.id_aluno = alunos.id_usuario  
                            ''')
-            resultSetList= cursor.fetchall()           
+            resultSetList= cursor.fetchall()
+            listaBiblioteca= list()
+            dicioanrioAluno= {}
+            for resultSet in resultSetList:
+                if resultSet[2] not in dicioanrioAluno:
+                    dicioanrioAluno.update({resultSet[2]:self._instanciaAluno(resultSet)})
+                
+                listaBiblioteca.append(self._instanciaBiblioteca(resultSet,dicioanrioAluno[resultSet[2]]))
+            return listaBiblioteca
         except sql.Error as erro:
             raise DbException(f"Erro ao buscar todas avaliaçoes. \nDetalhes: {erro}")
         finally:
@@ -52,5 +60,10 @@ class BibliotecaDaoSL3(BibliotecaDao):
         pass
 
 
-    def _instaciarBiblioteca(self, resultSet) -> Biblioteca:
-        id_biblioteca,nota,id_aluno= resultSet
+    def _instanciaBiblioteca(self, resultSet, aluno) -> Biblioteca:
+        id_biblioteca, nota= resultSet[0], resultSet[1]
+        return Biblioteca(id_biblioteca,nota,aluno)
+
+    def _instanciaAluno(self,resultSet) -> Aluno:
+        id_aluno,nome, sobrenome= resultSet[3], resultSet[4], resultSet[5]
+        return Aluno(id_aluno, nome, sobrenome)
