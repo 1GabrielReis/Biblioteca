@@ -17,6 +17,21 @@ class BibliotecaDaoSL3(BibliotecaDao):
 
     def insert(self,biblioteca: Biblioteca):
         pass
+        cursor= None 
+        try:
+            nota, id_aluno= biblioteca.nota, biblioteca.aluno.id
+            
+            cursor= self.conn.cursor()
+            cursor.execute('ISERT INTO avaliar_biblioteca(nota, id_alunos)  VALUE (?, ?)',(nota,id_aluno))
+            self.conn.commit()
+            if cursor.rowcount > 0:
+                biblioteca.id=cursor.lastrowid
+            else:
+                raise DbException(f"Erro, não foi possivel inserir os dados")
+        except sql.Error as erro:
+            raise DbException(f"Erro ao cadastrar avaliaçaõ do aluno. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     
     def update(self,biblioteca: Biblioteca):
@@ -46,9 +61,9 @@ class BibliotecaDaoSL3(BibliotecaDao):
                 return self._instanciaBiblioteca(resultSet,aluno)
             return None
         except sql.Error as erro:
-            raise DbException(f"Erro ao buscar aluno. \nDetalhes: {erro}")
+            raise DbException(f"Erro ao buscar avaliação. \nDetalhes: {erro}")
         finally:
-            DB.closeCursor(cursor)
+            DB.closeCursor(cursor)  
 
    
     def findAll(self) -> List[Biblioteca]:
