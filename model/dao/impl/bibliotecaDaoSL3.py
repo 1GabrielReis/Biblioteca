@@ -93,8 +93,33 @@ class BibliotecaDaoSL3(BibliotecaDao):
             DB.closeCursor(cursor)
 
 
-    def findByAluno(self) -> List[Aluno]:
-        pass
+    def findByAluno(self,aluno: Aluno):
+        cursor=None
+        try:
+            cursor= self.conn.cursor()
+            cursor.execute('''
+                            SELECT
+                            avaliar_biblioteca.id_biblioteca, avaliar_biblioteca.nota, avaliar_biblioteca.id_aluno,
+                            alunos.id_usuario, alunos.nome, alunos.sobrenome 
+                            FROM  avaliar_biblioteca
+                            INNER JOIN  alunos
+                            ON avaliar_biblioteca.id_aluno = alunos.id_usuario  
+                            WHERE alunos.id_usuario = ? 
+                            ORDER BY nome
+                            ''',(aluno.id,))
+            resultSetList= cursor.fetchall()
+            listaBiblioteca= list()
+            dicioanrioAluno= {}
+            for resultSet in resultSetList:
+                if resultSet[2] not in dicioanrioAluno:
+                    dicioanrioAluno.update({resultSet[2]:self._instanciaAluno(resultSet)})
+                
+                listaBiblioteca.append(self._instanciaBiblioteca(resultSet,dicioanrioAluno[resultSet[2]]))
+            return listaBiblioteca
+        except sql.Error as erro:
+            raise DbException(f"Erro ao retona lsita de avaliação. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
 
     def _instanciaBiblioteca(self, resultSet, aluno) -> Biblioteca:

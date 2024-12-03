@@ -40,7 +40,12 @@ def findAll():
     print(biblioteca)
 
 def findByAluno():
-    pass
+    print('find By Aluno')
+    id_aluno=int(input('Qual o ID do aluno para encontra sua avaliação da biblioteca: '))
+    aluno= Aluno(id_aluno,None,None)
+    biblioteca = bibliotecaDao.findByAluno(aluno)
+    print(biblioteca)
+
 
 def escolha():
     print("""
