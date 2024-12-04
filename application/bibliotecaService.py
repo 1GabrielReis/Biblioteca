@@ -12,12 +12,15 @@ ativo= True
 bibliotecaDao = DaoFactory.createBibliotecaDao()
 
 def insert():
-    pass
+
     print('Teste insert')
     nota=int(input('Uma nota de 0 a 10 em relaçao ao atendimento da biblioteca: '))
     id_aluno=(input('Qual o Id do aluno: '))
-    newAluno = Aluno(id_aluno,None,None)
-    BibliotecaDao.insert(nota,newAluno.id)
+    aluno = Aluno(id_aluno,None,None)
+    biblioteca= Biblioteca(None,nota,aluno)
+    bibliotecaDao.insert(biblioteca)
+    print("Inserido! novo Id: ", biblioteca.id)
+    print(biblioteca)
 
     
 

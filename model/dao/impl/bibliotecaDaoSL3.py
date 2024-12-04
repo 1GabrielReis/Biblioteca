@@ -19,10 +19,10 @@ class BibliotecaDaoSL3(BibliotecaDao):
         pass
         cursor= None 
         try:
-            nota, id_aluno= biblioteca.nota, biblioteca.aluno.id
-            
+            nota=  biblioteca.nota
+            id_aluno= biblioteca.aluno.id
             cursor= self.conn.cursor()
-            cursor.execute('ISERT INTO avaliar_biblioteca(nota, id_alunos)  VALUE (?, ?)',(nota,id_aluno))
+            cursor.execute('INSERT INTO avaliar_biblioteca(nota, id_aluno)  VALUES (?, ?)',(nota,id_aluno))
             self.conn.commit()
             if cursor.rowcount > 0:
                 biblioteca.id=cursor.lastrowid
