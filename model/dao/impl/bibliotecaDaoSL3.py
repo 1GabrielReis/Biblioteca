@@ -39,7 +39,17 @@ class BibliotecaDaoSL3(BibliotecaDao):
 
    
     def deleteById(self,id: int):
-        pass
+        cursor= None
+        try:
+            cursor= self.conn.cursor()
+            cursor.execute('DELETE FROM avaliar_biblioteca WHERE id_biblioteca = ?',(id,))
+            self.conn.commit()
+            if cursor.rowcount == 0:
+                raise DbException(f"ID não encontrado")
+        except sql.Error as erro:
+            raise DbException(f"Erro ao deletar avaliação. \n Detalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
    
     def findById(self,id: int):

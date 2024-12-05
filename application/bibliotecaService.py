@@ -12,7 +12,6 @@ ativo= True
 bibliotecaDao = DaoFactory.createBibliotecaDao()
 
 def insert():
-
     print('Teste insert')
     nota=int(input('Uma nota de 0 a 10 em relaçao ao atendimento da biblioteca: '))
     id_aluno=(input('Qual o Id do aluno: '))
@@ -23,12 +22,15 @@ def insert():
     print(biblioteca)
 
     
-
 def update():
     pass
 
 def deleteById():
-    pass
+    print('Teste delete By Id')
+    id_biblioteca=int(input('ID da avaliação da biblioteca: '))
+    bibliotecaDao.deleteById(id_biblioteca)
+    print('Delete realizado com sucesso! ')
+
 
 def findById():
     print('Teste find By Id')
