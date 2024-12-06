@@ -23,7 +23,21 @@ def insert():
 
     
 def update():
-    pass
+    print('Teste update')
+    id_biblioteca= int(input('Qual o id da avaliação da biblioteca: '))
+    biblioteca= bibliotecaDao.findById(id_biblioteca)
+    atributo=int(input("""
+                   Qual atributo você desja alterar:
+                   1- nota da avalição
+                   2- id do aluno
+                   """))
+    if atributo == 1:
+        biblioteca.nota=int(input('Qual a nota de avaliação da biblioteca: '))
+    else:
+        biblioteca.aluno.id=int(input('Qual o ID do aluno: '))
+    bibliotecaDao.update(biblioteca)
+    biblioteca= bibliotecaDao.findById(id_biblioteca)
+    print(biblioteca)
 
 def deleteById():
     print('Teste delete By Id')

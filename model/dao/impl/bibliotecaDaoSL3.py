@@ -35,7 +35,20 @@ class BibliotecaDaoSL3(BibliotecaDao):
 
     
     def update(self,biblioteca: Biblioteca):
-        pass
+        cursor=None
+        try:
+            id_biblioteca= biblioteca.id
+            nota=biblioteca.nota
+            id_aluno=biblioteca.aluno.id
+            cursor=self.conn.cursor()
+            cursor.execute('''UPDATE avaliar_biblioteca
+                            SET nota = ?, id_aluno = ?
+                            WHERE id_biblioteca = ?''',(nota,id_aluno,id_biblioteca))
+            self.conn.commit()
+        except sql.Error as erro:
+            raise DbException(f"Erro ao atualizar avaliação. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
    
     def deleteById(self,id: int):
