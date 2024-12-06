@@ -23,7 +23,7 @@ class BibliotecaDao(ABC):
         pass
 
     @abstractmethod
-    def findAll(self,biblioteca: List[Biblioteca]):
+    def findAll(self) -> List[Biblioteca]:
         pass
 
     @abstractmethod

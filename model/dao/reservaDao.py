@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from ..entities.reserva import Reserva
+from ..entities.livro import Livro
+from ..entities.aluno import Aluno
 
 class ReservaDao(ABC):
     @abstractmethod
@@ -21,5 +23,13 @@ class ReservaDao(ABC):
         pass
 
     @abstractmethod
-    def findAll(self,reserva: List[Reserva]):
+    def findAll(self) -> List[Reserva]:
+        pass
+
+    @abstractmethod
+    def findByLivro(self) -> List[Livro]:
+        pass
+
+    @abstractmethod
+    def findByAluno(self) -> List[Aluno]:
         pass
