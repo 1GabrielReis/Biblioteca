@@ -72,10 +72,13 @@ class ReservaDaoSL3(ReservaDao):
         pass
     
     def _instanciaLivro(self, resultSet):
-        pass
+        id_livro, titulo, autor, editora = resultSet[5], resultSet[6], resultSet[7], resultSet[8]
+        return Livro(id_livro, titulo, autor, editora)
 
     def _instanciaAluno(self, resultSet):
-        pass
+        id_usuario, nome, sobrenome= resultSet[10], resultSet[11], resultSet[12]
+        return Aluno(id_usuario, nome, sobrenome)
 
     def _instanciaReserva(self, resultSet, livro: Livro, aluno: Aluno):
-        pass
+        id_reserva, data_inicial, data_final, data_entregue =  resultSet[0], resultSet[1], resultSet[2], resultSet[3]
+        return Reserva(id_reserva,livro,aluno,data_inicial,data_final,data_entregue)
