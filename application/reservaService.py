@@ -13,7 +13,6 @@ ativo= True
 reservaDao = DaoFactory.createBibliotecaDao()
 
 def insert():
-    
     pass
 
 
