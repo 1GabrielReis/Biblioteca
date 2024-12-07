@@ -10,7 +10,7 @@ from model.dao.reservaDao import Reserva
 
 
 ativo= True
-bibliotecaDao = DaoFactory.createBibliotecaDao()
+reservaDao = DaoFactory.createBibliotecaDao()
 
 def insert():
     
@@ -40,18 +40,21 @@ def findByLivro() :
 def findByAluno():
     pass
 
+def escolha():
     print("""
                   Menu
           Digite sua escolha:
-          1- Avaliar o atendimento  
-          2- Altera avalição do atendiemnto
-          3- Excluir avalição do atendiemnto
-          4- encontrar avalição do atendiemnto
-          5- Listar de avalição do atendiemnto
-          6- Lista de aluno que avaliaram o atenmento
-          7- Sair do sistema
+          1- Adiconar reserva  
+          2- Altera reserva
+          3- Excluir reserva
+          4- Encontrar reserva
+          5- Listar de reserva
+          6- Lista de livros reservado
+          7- Lista de alunos que reservaram
+          8- Sair do sistema
           """)
     return int(input())
+
 
 def sistema():
     resposta= escolha()
@@ -67,9 +70,11 @@ def sistema():
     elif resposta == 5:
         findAll()
     elif resposta == 6:
-        findByAluno()
+        findByLivro()
     elif resposta == 7:
-        ativo= False
+        findByAluno()
+    elif resposta == 8:
+        ativo= False    
     else:
         print('Escolha invalida')
     return ativo
