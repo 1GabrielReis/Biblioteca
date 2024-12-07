@@ -12,4 +12,10 @@ class Reserva:
         self.data_final=data_final
         self.data_entregue=data_entregue
 
+    def __str__(self):
+        return f'''
+        ({self.id}, {self.data_inicio}, {self.data_final}, {self.data_final}, {self.livro.id}, {self.livro.titutlo}, {self.aluno.id}, {self.aluno.nome})
+        '''
     
+    def __repr__(self) -> str:
+        return self.__str__()
