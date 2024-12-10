@@ -32,12 +32,11 @@ class ReservaDaoSL3(ReservaDao):
     def findById(self,id: int):
         pass
 
-    
     def findAll(self) -> List[Reserva]:
         cursor= None
         try:
             cursor=self.conn.cursor()
-            cursor.execute('''
+            resultSetList='''
                             SELECT
                             Reservas.id_reserva, Reservas.data_inicial, Reservas.data_final, Reservas.data_entregue,  
                             Reservas.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora,
@@ -45,12 +44,11 @@ class ReservaDaoSL3(ReservaDao):
                             FROM Reservas
                             INNER JOIN livros ON Reservas.id_livro =  livros.id_livro
                             INNER JOIN alunos ON Reservas.id_aluno = alunos.id_usuario;
-                           ''')
-            resultSetList= cursor.fetchall()
-            listaReserva= List()
+                        '''
+            listaReserva= list()
             dicioanrioLivros= {}
             dicioanrioAluno= {}
-            for resultSet in resultSetList:
+            for resultSet in cursor.execute(resultSetList):
                 if resultSet[4] not in dicioanrioLivros:
                     livro= self._instanciaLivro(resultSet)
                     dicioanrioLivros.update({resultSet[4]:livro})
@@ -63,7 +61,8 @@ class ReservaDaoSL3(ReservaDao):
             raise DbException(f"Erro ao buscar todas reserva. \nDetalhes: {erro}")
         finally:
             DB.closeCursor(cursor)
-
+    
+ 
     def findByLivro(self) -> List[Livro]:
         pass
 

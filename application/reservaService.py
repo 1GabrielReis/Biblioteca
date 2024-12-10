@@ -10,7 +10,7 @@ from model.dao.reservaDao import Reserva
 
 
 ativo= True
-reservaDao = DaoFactory.createBibliotecaDao()
+reservaDao = DaoFactory.createReservaDao()
 
 def insert():
     pass
@@ -29,7 +29,9 @@ def findById():
 
 
 def findAll():
-    pass
+    print('test find All')
+    reserva: Reserva= reservaDao.findAll()
+    print(reserva)
 
 
 def findByLivro() :
