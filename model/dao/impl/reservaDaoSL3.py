@@ -30,7 +30,28 @@ class ReservaDaoSL3(ReservaDao):
 
     
     def findById(self,id: int):
-        pass
+        cursor= None
+        try:
+            cursor= self.conn.execute('''
+                            SELECT
+                            Reservas.id_reserva, Reservas.data_inicial, Reservas.data_final, Reservas.data_entregue,  
+                            Reservas.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora,
+                            Reservas.id_aluno, alunos.id_usuario, alunos.nome, alunos.sobrenome
+                            FROM Reservas
+                            INNER JOIN livros ON Reservas.id_livro =  livros.id_livro
+                            INNER JOIN alunos ON Reservas.id_aluno = alunos.id_usuario
+                            WHERE id_reserva = ?;
+                            ''', (id,))
+            resultSet=cursor.fetchone()
+            if resultSet is not None:
+                livro= self._instanciaLivro(resultSet)
+                aluno= self._instanciaAluno(resultSet)
+                return self._instanciaReserva(resultSet,livro,aluno)
+            return None
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar reserva. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)  
 
     def findAll(self) -> List[Reserva]:
         cursor= None

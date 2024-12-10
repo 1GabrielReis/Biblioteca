@@ -25,7 +25,11 @@ def deleteById():
 
 
 def findById():
-    pass
+    print('find by id')
+    id_reserva= int(input('Qual o Id da reserva: '))
+    reserva= reservaDao.findById(id_reserva)
+    print(reserva)
+
 
 
 def findAll():
