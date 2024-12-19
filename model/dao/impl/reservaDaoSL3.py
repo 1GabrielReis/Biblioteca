@@ -101,4 +101,5 @@ class ReservaDaoSL3(ReservaDao):
 
     def _instanciaReserva(self, resultSet, livro: Livro, aluno: Aluno):
         id_reserva, data_inicial, data_final, data_entregue =  resultSet[0], resultSet[1], resultSet[2], resultSet[3]
-        return Reserva(id_reserva,livro,aluno,data_inicial,data_final,data_entregue)
+        return  Reserva(id_reserva,livro,aluno,data_inicial,data_final,data_entregue)
+         
