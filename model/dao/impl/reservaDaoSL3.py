@@ -1,6 +1,6 @@
 from typing import List
 import sqlite3 as sql
-import datetime
+from datetime import datetime
 
 from model.entities.reserva import Reserva
 from model.dao.reservaDao import ReservaDao
@@ -98,8 +98,13 @@ class ReservaDaoSL3(ReservaDao):
     def _instanciaAluno(self, resultSet):
         id_usuario, nome, sobrenome= resultSet[10], resultSet[11], resultSet[12]
         return Aluno(id_usuario, nome, sobrenome)
-
+    
     def _instanciaReserva(self, resultSet, livro: Livro, aluno: Aluno):
         id_reserva, data_inicial, data_final, data_entregue =  resultSet[0], resultSet[1], resultSet[2], resultSet[3]
-        return  Reserva(id_reserva,livro,aluno,data_inicial,data_final,data_entregue)
+        return  Reserva(id_reserva,livro,aluno,self._converteData(data_inicial),self._converteData(data_final),self._converteData(data_entregue))
          
+    def _converteData(self,dataHora):
+        print("dataHora:",dataHora,"Do tipo:",type(dataHora))
+        x= datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
+        print("dataHora:",x,"Do tipo:",type(x))
+        return x
