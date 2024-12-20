@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from model.entities.livro import Livro
 from model.entities.aluno import Aluno
@@ -14,8 +14,11 @@ class Reserva:
 
     def __str__(self):
         return f'''
-        ({self.id}, {self.data_inicio}, {self.data_final}, {self.data_final}, {self.livro.id}, {self.livro.titutlo}, {self.aluno.id}, {self.aluno.nome})
+        ({self.id}, {self._formataData(self.data_inicio)}, {self._formataData(self.data_final)}, {self._formataData(self.data_final)}, {self.livro.id}, {self.livro.titutlo}, {self.aluno.id}, {self.aluno.nome})
         '''
     
     def __repr__(self) -> str:
         return self.__str__()
+    
+    def _formataData(self, data:datetime) -> str:
+        return data.strftime(" %d/ %m /%Y ")

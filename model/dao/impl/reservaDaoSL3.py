@@ -104,7 +104,4 @@ class ReservaDaoSL3(ReservaDao):
         return  Reserva(id_reserva,livro,aluno,self._converteData(data_inicial),self._converteData(data_final),self._converteData(data_entregue))
          
     def _converteData(self,dataHora):
-        print("dataHora:",dataHora,"Do tipo:",type(dataHora))
-        x= datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
-        print("dataHora:",x,"Do tipo:",type(x))
-        return x
+        return datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
