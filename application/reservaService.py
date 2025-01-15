@@ -13,7 +13,21 @@ ativo= True
 reservaDao = DaoFactory.createReservaDao()
 
 def insert():
-    pass
+    print("test insert")
+    id_aluno=input('Nome do aluno: ')
+    id_livro=input('Livro reservado: ')
+    text_data=['Data reservada: ', 'Data de entrega: ']
+    data_reserva=[]
+    for texto in text_data:
+        print(texto)
+        dia= int(input('Dia: '))
+        mes= int(input('Mes: '))
+        ano= int(input('Ano: '))
+        data_reserva.append('{}/{}/{}'.format(dia,mes,ano))
+    reserva=Reserva(None,id_livro,id_aluno,data_reserva[0],data_reserva[1],None)
+    reservaDao.insert(reserva)
+    print(f"Inserido! novo Id: {reserva.id} \n {reserva}")
+    
 
 
 def update():
@@ -25,7 +39,7 @@ def deleteById():
 
 
 def findById():
-    print('find by id')
+    print('test find by id')
     id_reserva= int(input('Qual o Id da reserva: '))
     reserva= reservaDao.findById(id_reserva)
     print(reserva)
