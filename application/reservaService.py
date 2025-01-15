@@ -24,7 +24,9 @@ def insert():
         mes= int(input('Mes: '))
         ano= int(input('Ano: '))
         data_reserva.append('{}/{}/{}'.format(dia,mes,ano))
-    reserva=Reserva(None,id_livro,id_aluno,data_reserva[0],data_reserva[1],None)
+    aluno=Aluno(id_aluno, None, None)
+    livro=Livro(id_livro, None, None, None)
+    reserva=Reserva(None,livro,aluno,data_reserva[0],data_reserva[1],None)
     reservaDao.insert(reserva)
     print(f"Inserido! novo Id: {reserva.id} \n{reserva}")
     

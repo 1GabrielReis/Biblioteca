@@ -25,7 +25,7 @@ class ReservaDaoSL3(ReservaDao):
             id_aluno= reserva.aluno.id
             id_livro= reserva.livro.id 
             cursor = self.conn.execute('''
-                                       INSERT INTO Reservas(data_incial, data_entregue, id_aluno, id_livro) VALUES (?, ?, ?, ?)'''
+                                       INSERT INTO Reservas(data_inicial, data_entregue, id_aluno, id_livro) VALUES (?, ?, ?, ?)'''
                                        ,(data_incial, data_final, id_aluno,id_livro)
                                        )
             self.conn.commit()
