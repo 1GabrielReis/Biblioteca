@@ -14,8 +14,8 @@ reservaDao = DaoFactory.createReservaDao()
 
 def insert():
     print("test insert")
-    id_aluno=input('Nome do aluno: ')
-    id_livro=input('Livro reservado: ')
+    id_aluno=input('Qul o Id do aluno: ')
+    id_livro=input('Qual o Id do Livro: ')
     text_data=['Data reservada: ', 'Data de entrega: ']
     data_reserva=[]
     for texto in text_data:
@@ -26,7 +26,7 @@ def insert():
         data_reserva.append('{}/{}/{}'.format(dia,mes,ano))
     reserva=Reserva(None,id_livro,id_aluno,data_reserva[0],data_reserva[1],None)
     reservaDao.insert(reserva)
-    print(f"Inserido! novo Id: {reserva.id} \n {reserva}")
+    print(f"Inserido! novo Id: {reserva.id} \n{reserva}")
     
 
 

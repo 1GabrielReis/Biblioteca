@@ -20,14 +20,13 @@ class ReservaDaoSL3(ReservaDao):
     def insert(self,reserva: Reserva):
         cursor= None
         try:
-            data_incial= reserva.data_inicio
-            data_final= reserva.data_final
-            data_entregue= reserva.data_entregue
+            data_incial= self._converteDataTexto(reserva.data_inicio)
+            data_final= self._converteDataTexto(reserva.data_final)
             id_aluno= reserva.aluno.id
             id_livro= reserva.livro.id 
             cursor = self.conn.execute('''
-                                       INSERT INTO Reservas(data_incial, data_final, data_entregue, id_aluno, id_livro) VALUES (?, ?, ?, ?, ?)'''
-                                       ,(data_incial, data_final, data_entregue, id_aluno,id_livro)
+                                       INSERT INTO Reservas(data_incial, data_entregue, id_aluno, id_livro) VALUES (?, ?, ?, ?)'''
+                                       ,(data_incial, data_final, id_aluno,id_livro)
                                        )
             self.conn.commit()
             if cursor.rowcount > 0:
@@ -119,7 +118,10 @@ class ReservaDaoSL3(ReservaDao):
     
     def _instanciaReserva(self, resultSet, livro: Livro, aluno: Aluno):
         id_reserva, data_inicial, data_final, data_entregue =  resultSet[0], resultSet[1], resultSet[2], resultSet[3]
-        return  Reserva(id_reserva,livro,aluno,self._converteData(data_inicial),self._converteData(data_final),self._converteData(data_entregue))
+        return  Reserva(id_reserva,livro,aluno,self._converteDataSQL(data_inicial),self._converteDataSQL(data_final),self._converteDataSQL(data_entregue))
          
-    def _converteData(self,dataHora):
+    def _converteDataSQL(self,dataHora):
         return datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
+    
+    def _converteDataTexto(self,data):
+        return datetime.strptime(data,'%d/%m/%Y')
