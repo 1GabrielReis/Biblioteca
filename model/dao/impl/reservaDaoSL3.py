@@ -47,7 +47,7 @@ class ReservaDaoSL3(ReservaDao):
         try:
             cursor= self.conn.cursor()
             cursor.execute('DELETE FROM Reservas WHERE id_reserva = ?',(id,))
-            cursor.commit()
+            self.conn.commit()
             if cursor.rowcount == 0:
                 raise DbException(f"ID não encontrado")
         except sql.Error as erro:
