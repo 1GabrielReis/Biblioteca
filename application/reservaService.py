@@ -37,7 +37,10 @@ def update():
 
 
 def deleteById():
-    pass
+    print("test deleteById")
+    id_reserva=int(input('Id da reserva: '))
+    reservaDao.deleteById(id_reserva)
+    print('Delete realizado com sucesso! ')
 
 
 def findById():
