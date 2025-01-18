@@ -132,8 +132,9 @@ class ReservaDaoSL3(ReservaDao):
         return  Reserva(id_reserva,livro,aluno,self._converteDataSQL(data_inicial),self._converteDataSQL(data_final),self._converteDataSQL(data_entregue))
          
     def _converteDataSQL(self,dataHora):
-        if dataHora not in None:
+        if dataHora is not None:
             return datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
+       
     
     def _converteDataTexto(self,data):
         if data not in None:
