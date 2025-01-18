@@ -137,5 +137,5 @@ class ReservaDaoSL3(ReservaDao):
        
     
     def _converteDataTexto(self,data):
-        if data not in None:
+        if data is not None:
             return datetime.strptime(data,'%d/%m/%Y')
