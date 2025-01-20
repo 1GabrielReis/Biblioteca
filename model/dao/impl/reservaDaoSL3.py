@@ -18,25 +18,7 @@ class ReservaDaoSL3(ReservaDao):
     
     
     def insert(self,reserva: Reserva):
-        cursor= None
-        try:
-            data_incial= self._converteDataTexto(reserva.data_inicio)
-            data_final= self._converteDataTexto(reserva.data_final)
-            id_aluno= reserva.aluno.id
-            id_livro= reserva.livro.id 
-            cursor = self.conn.execute('''
-                                       INSERT INTO Reservas(data_inicial, data_entregue, id_aluno, id_livro) VALUES (?, ?, ?, ?)'''
-                                       ,(data_incial, data_final, id_aluno,id_livro)
-                                       )
-            self.conn.commit()
-            if cursor.rowcount > 0:
-                reserva.id=cursor.lastrowid
-            else:
-                raise DbException(f"Erro tentar inserir a reserva. \nDetalhes: {erro}")
-        except sql.Error as erro:
-            raise DbException(f"Erro ao cadastra reserva. \nDetalhes: {erro}")
-        finally:
-            DB.closeCursor(cursor)  
+        pass
 
     def update(self,reserva: Reserva):
         pass
