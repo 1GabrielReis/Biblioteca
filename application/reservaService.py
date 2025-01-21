@@ -1,6 +1,6 @@
 from typing import List
 from abc import ABC, abstractmethod
-import datetime
+from datetime import datetime
 
 from model.entities.livro import Livro
 from model.entities.aluno import Aluno
@@ -8,12 +8,39 @@ from model.entities.reserva import Reserva
 from model.dao.daoFactory import DaoFactory
 from model.dao.reservaDao import Reserva
 
+class ClassAbstrata(ABC):
+    @abstractmethod
+    def _converteDataTexto(self):
+        pass
+
+class DataTempo(ClassAbstrata):
+    def _converteDataTexto(self,data):
+        if data is not None:
+            return datetime.strptime(data,'%d/%m/%Y')
 
 ativo= True
 reservaDao = DaoFactory.createReservaDao()
+converteDataTempo= DataTempo()
 
 def insert():
     pass
+    #livro= Livro(6,None,None,None)
+    #aluno= Aluno(6,None,None)
+    #data_inicial=converteDataTempo._converteDataTexto('20/01/2025')
+    #print(data_inicial)
+    #data_final=converteDataTempo._converteDataTexto('20/02/2025')
+    #print(data_final)
+    #data_entregue=converteDataTempo._converteDataTexto('15/02/2025')
+    #print(data_entregue)
+    #reserva= Reserva(1, livro, aluno, data_inicial, data_final, data_entregue)
+    #print(reserva)
+    #reserva= Reserva(livro,aluno,data_inicial,data_final,data_entregue)
+    #reserva1='20/01/2025'
+    #print(reserva1)
+    #reserva2=converteDataTempo._converteDataTexto(reserva1)
+    #print(reserva2)
+    #print('Fim')
+
 
 
 def update():

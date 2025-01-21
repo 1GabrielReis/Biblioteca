@@ -20,5 +20,7 @@ class Reserva:
     def __repr__(self) -> str:
         return self.__str__()
     
-    def _formataData(self, data:datetime) -> str:
-        return data.strftime(" %d/ %m /%Y ")
+    def _formataData(self, data:datetime):
+        if data  is not None:
+            return data.strftime(" %d/ %m /%Y ")
+        return None
