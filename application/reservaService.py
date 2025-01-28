@@ -23,26 +23,25 @@ reservaDao = DaoFactory.createReservaDao()
 converteDataTempo= DataTempo()
 
 def insert():
-    pass
-    #livro= Livro(6,None,None,None)
-    #aluno= Aluno(6,None,None)
-    #data_inicial=converteDataTempo._converteDataTexto('20/01/2025')
-    #print(data_inicial)
-    #data_final=converteDataTempo._converteDataTexto('20/02/2025')
-    #print(data_final)
-    #data_entregue=converteDataTempo._converteDataTexto('15/02/2025')
-    #print(data_entregue)
-    #reserva= Reserva(1, livro, aluno, data_inicial, data_final, data_entregue)
-    #print(reserva)
-    #reserva= Reserva(livro,aluno,data_inicial,data_final,data_entregue)
-    #reserva1='20/01/2025'
-    #print(reserva1)
-    #reserva2=converteDataTempo._converteDataTexto(reserva1)
-    #print(reserva2)
-    #print('Fim')
-
-
-
+    id_aluno=int(input("Id do aluno: "))
+    aluno= Aluno(id_aluno, None, None)
+    id_livro=int(input("Id do livro "))
+    livro= Livro(id_livro, None, None, None)
+    info_datas=(' Data incial ',' Data final ')
+    datas=[]
+    for data in info_datas:
+        print(data)
+        dia= int(input('Dia: '))
+        mes= int(input('Mes: '))
+        ano= int(input('Ano: '))
+        converteIntText='{}/{}/{}'.format(dia,mes,ano)
+        datas.append(converteDataTempo._converteDataTexto(converteIntText))
+    data_inicial, data_final= datas = datas
+    reserva= Reserva(None, livro, aluno, data_inicial, data_final, None)
+    reservaDao.insert(reserva)
+    print("Inserido! novo Id: ", reserva.id)
+    print(reserva)
+    
 def update():
     pass
 
