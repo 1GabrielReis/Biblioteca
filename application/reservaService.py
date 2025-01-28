@@ -74,6 +74,9 @@ def findByLivro() :
 def findByAluno():
     pass
 
+def devolverLivro():
+    pass
+
 def escolha():
     print("""
                   Menu
@@ -85,7 +88,8 @@ def escolha():
           5- Listar de reserva
           6- Lista de livros reservado
           7- Lista de alunos que reservaram
-          8- Sair do sistema
+          8- Devolver livro 
+          9- Sair do sistema
           """)
     return int(input())
 
@@ -108,6 +112,8 @@ def sistema():
     elif resposta == 7:
         findByAluno()
     elif resposta == 8:
+        devolverLivro()
+    elif resposta == 9:
         ativo= False    
     else:
         print('Escolha invalida')
