@@ -18,7 +18,27 @@ class ReservaDaoSL3(ReservaDao):
     
     
     def insert(self,reserva: Reserva):
-        pass
+        cursor= None
+        try:
+            data_inicial= self._converteDataTextoSQL(reserva.data_inicio)
+            data_final= self._converteDataTextoSQL(reserva.data_final)
+            id_aluno= reserva.aluno.id
+            id_livro= reserva.livro.id
+            cursor= self.conn.cursor()
+            cursor.execute('''INSERT INTO Reservas(data_inicial, data_final, id_aluno, id_livro) 
+                          VALUES (?, ?, ?, ?)''',
+                         (data_inicial, data_final, id_aluno, id_livro))
+            self.conn.commit()
+            if cursor.rowcount > 0:
+                reserva.id=cursor.lastrowid
+            else:
+                raise DbException(f"Erro, não foi possivel inserir os dados")
+        except sql.Error as erro:
+            raise DbException(f"Erro ao Reserva. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
+            
+            
 
     def update(self,reserva: Reserva):
         pass
@@ -117,6 +137,10 @@ class ReservaDaoSL3(ReservaDao):
         if dataHora is not None:
             return datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
        
+    def _converteDataTextoSQL(self, data: datetime):
+        if data is not None:
+            return data.strftime("%Y-%m-%d %H:%M:%S")
+        return None
     
     def _converteDataTexto(self,data):
         if data is not None:
