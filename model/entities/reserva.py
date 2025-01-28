@@ -14,7 +14,7 @@ class Reserva:
 
     def __str__(self):
         return f'''
-        ({self.id}, {self._formataData(self.data_inicio)}, {self._formataData(self.data_final)}, {self._formataData(self.data_final)}, {self.livro.id}, {self.livro.titutlo}, {self.aluno.id}, {self.aluno.nome})
+        ({self.id}, {self._formataData(self.data_inicio)}, {self._formataData(self.data_final)}, {self._formataData(self.data_entregue)}, {self.livro.id}, {self.livro.titutlo}, {self.aluno.id}, {self.aluno.nome})
         '''
     
     def __repr__(self) -> str:
