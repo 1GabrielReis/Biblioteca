@@ -23,6 +23,7 @@ reservaDao = DaoFactory.createReservaDao()
 converteDataTempo= DataTempo()
 
 def insert():
+    print('Teste insert')
     id_aluno=int(input("Id do aluno: "))
     aluno= Aluno(id_aluno, None, None)
     id_livro=int(input("Id do livro "))
@@ -43,7 +44,47 @@ def insert():
     print(reserva)
     
 def update():
-    pass
+    print('Teste update')
+    id_reserva= int(input('Qual o id da reserva:'))
+    reserva= reservaDao.findById(id_reserva)
+    atributo= int(input(
+                        '''
+                        Qual atributo você deseja alterar
+                        1 - Id do aluno 
+                        2 - Id do livro
+                        3 - Datas da reserva 
+                    '''))
+    if atributo == 1:
+        reserva.aluno.id = int(input('Qual o Id do aluno: '))
+    elif atributo == 2:
+        reserva.livro.id= int(input('Qual o Id do livro: '))
+    elif atributo == 3:
+        data= int(input(
+                '''
+                Qual data você deja altera:
+                1 - Data incial 
+                2 - Data final 
+                3 - Data de entrega 
+                ''')) 
+        if data == 1:
+            print('Qual a data incial: ')
+            #reserva.data_inicio = metodo
+        elif data == 2:
+            print('Qual a data final: ')
+            #reserva.data_final = metodo
+        elif data == 3:
+            print('Qual a data de entraga: ')
+            #reserva.data_entregue = metodo
+        else:
+            raise ValueError("Idade inválida. Deve estar entre 1 a 3")
+    else:
+        raise ValueError("Idade inválida. Deve estar entre 1 a 3")
+    #reservaDao.update(reserva)
+    #reserva = reservaDao.findById(id_reserva)
+    #print
+
+
+
 
 
 def deleteById():
