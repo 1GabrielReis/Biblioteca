@@ -17,6 +17,13 @@ class DataTempo(ClassAbstrata):
     def _converteDataTexto(self,data):
         if data is not None:
             return datetime.strptime(data,'%d/%m/%Y')
+        
+    def _gerarData(self) -> datetime:
+        dia= int(input('Dia: '))
+        mes= int(input('Mes: '))
+        ano= int(input('Ano: '))
+        data='{}/{}/{}'.format(dia,mes,ano)
+        return self._converteDataTexto(data)    
 
 ativo= True
 reservaDao = DaoFactory.createReservaDao()
