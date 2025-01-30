@@ -39,11 +39,7 @@ def insert():
     datas=[]
     for data in info_datas:
         print(data)
-        dia= int(input('Dia: '))
-        mes= int(input('Mes: '))
-        ano= int(input('Ano: '))
-        converteIntText='{}/{}/{}'.format(dia,mes,ano)
-        datas.append(converteDataTempo._converteDataTexto(converteIntText))
+        datas.append(converteDataTempo._gerarData())
     data_inicial, data_final= datas = datas
     reserva= Reserva(None, livro, aluno, data_inicial, data_final, None)
     reservaDao.insert(reserva)
