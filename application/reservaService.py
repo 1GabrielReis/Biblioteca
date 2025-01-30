@@ -71,20 +71,21 @@ def update():
                 ''')) 
         if data == 1:
             print('Qual a data incial: ')
-            #reserva.data_inicio = metodo
+            reserva.data_inicio = converteDataTempo._gerarData()
+            print(reserva.data_inicio)
         elif data == 2:
             print('Qual a data final: ')
-            #reserva.data_final = metodo
+            reserva.data_final = converteDataTempo._gerarData()
         elif data == 3:
             print('Qual a data de entraga: ')
-            #reserva.data_entregue = metodo
+            reserva.data_entregue = converteDataTempo._gerarData()
         else:
             raise ValueError("Idade inválida. Deve estar entre 1 a 3")
     else:
         raise ValueError("Idade inválida. Deve estar entre 1 a 3")
-    #reservaDao.update(reserva)
-    #reserva = reservaDao.findById(id_reserva)
-    #print
+    reservaDao.update(reserva)
+    reserva = reservaDao.findById(id_reserva)
+    print(reserva)
 
 
 
