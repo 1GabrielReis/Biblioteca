@@ -41,7 +41,30 @@ class ReservaDaoSL3(ReservaDao):
             
 
     def update(self,reserva: Reserva):
-        pass
+        cursor = None
+        try:
+            reserva_id= reserva.id
+            data_inicial= self._converteDataTextoSQL(reserva.data_inicio)
+            data_final= self._converteDataTextoSQL(reserva.data_final)
+            data_entregue= self._converteDataSQL(reserva.data_entregue)
+            id_aluno= reserva.aluno.id
+            id_livro= reserva.livro.id
+            cursor= self.conn.cursor()
+            cursor.execute('''
+                            UPDATE Reservas SET 
+                            data_inicial = ?,
+                            data_final = ?,
+                            data_entregue = ?,
+                            id_aluno = ?,
+                            id_livro = ?
+                            WHERE id_reserva = ?''',
+                            (data_inicial, data_final, data_entregue,
+                             id_aluno, id_livro, reserva_id))
+            self.conn.commit()
+        except sql.Error as erro:
+            raise DbException(f"Erro ao atualizar reserva. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     
     def deleteById(self,id: int):
@@ -145,3 +168,4 @@ class ReservaDaoSL3(ReservaDao):
     def _converteDataTexto(self,data):
         if data is not None:
             return datetime.strptime(data,'%d/%m/%Y')
+        return None

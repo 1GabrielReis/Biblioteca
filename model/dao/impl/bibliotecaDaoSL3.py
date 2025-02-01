@@ -16,7 +16,6 @@ class BibliotecaDaoSL3(BibliotecaDao):
         self.conn=conn
 
     def insert(self,biblioteca: Biblioteca):
-        pass
         cursor= None 
         try:
             nota=  biblioteca.nota
