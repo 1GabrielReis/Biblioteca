@@ -141,8 +141,38 @@ class ReservaDaoSL3(ReservaDao):
         pass
 
     
-    def findByAluno(self) -> List[Aluno]:
-        pass
+    def findByAluno(self, aluno: Aluno):
+        cursor= None
+        try:
+            id_aluno= aluno.id
+            cursor= self.conn.cursor()
+            cursor.execute('''
+                            SELECT
+                            Reservas.id_reserva, Reservas.data_inicial, Reservas.data_final, Reservas.data_entregue,  
+                            Reservas.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora,
+                            Reservas.id_aluno, alunos.id_usuario, alunos.nome, alunos.sobrenome
+                            FROM Reservas
+                            INNER JOIN livros ON Reservas.id_livro =  livros.id_livro
+                            INNER JOIN alunos ON Reservas.id_aluno = alunos.id_usuario
+                            WHERE Reservas.id_aluno= ?''',(id_aluno,))
+            resultSetList= cursor.fetchall()
+            listaReserva= list()
+            dicioanrioLivros= {}
+            dicioanrioAluno= {}
+            for resultSet in resultSetList:
+                if resultSet[4] not in dicioanrioLivros:
+                    livro= self._instanciaLivro(resultSet)
+                    dicioanrioLivros.update({resultSet[4]:livro})
+                if resultSet[9] not in dicioanrioAluno:
+                    aluno= self._instanciaAluno(resultSet)
+                    dicioanrioAluno.update({resultSet[9]: aluno})
+                listaReserva.append(self._instanciaReserva(resultSet,dicioanrioLivros[resultSet[4]],dicioanrioAluno[resultSet[9]]))
+            return listaReserva
+
+        except sql.Error as erro:
+            raise DbException(f"Erro ao retona lsita de reservas. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
     
     def _instanciaLivro(self, resultSet):
         id_livro, titulo, autor, editora = resultSet[5], resultSet[6], resultSet[7], resultSet[8]
