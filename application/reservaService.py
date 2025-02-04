@@ -117,7 +117,11 @@ def findByLivro() :
 
 
 def findByAluno():
-    pass
+    print("findByAluno")
+    id_aluno=int(input('Qual o id do aluno para ewncontra sua reservas: '))
+    aluno= Aluno(id_aluno,None, None)
+    reservas= reservaDao.findByAluno(aluno)
+    print(reservas)
 
 def devolverLivro():
     pass
