@@ -137,8 +137,36 @@ class ReservaDaoSL3(ReservaDao):
             DB.closeCursor(cursor)
     
  
-    def findByLivro(self) -> List[Livro]:
-        pass
+    def findByLivro(self, livro: Livro):
+        cursor= None
+        try:
+            id_livro= livro.id
+            cursor= self.conn.cursor()
+            resultSetList=  cursor.execute( '''
+                                SELECT
+                                Reservas.id_reserva, Reservas.data_inicial, Reservas.data_final, Reservas.data_entregue,  
+                                Reservas.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora,
+                                Reservas.id_aluno, alunos.id_usuario, alunos.nome, alunos.sobrenome
+                                FROM Reservas
+                                INNER JOIN livros ON Reservas.id_livro =  livros.id_livro
+                                INNER JOIN alunos ON Reservas.id_aluno = alunos.id_usuario
+                                WHERE Reservas.id_livro = ?
+                                ORDER BY nome
+                            ''',(id_livro,))
+            listaReserva= []
+            dicionarioAluno= {}
+            dicionarioLivro= {}
+            for resultSet in resultSetList:
+                if resultSet[9] not in dicionarioAluno:
+                    dicionarioAluno.update({resultSet[9]: self._instanciaAluno(resultSet)})
+                if resultSet[4] not in dicionarioLivro:
+                    dicionarioLivro.update({resultSet[4]: self._instanciaLivro(resultSet)})
+                listaReserva.append(self._instanciaReserva(resultSet,dicionarioLivro[resultSet[4]],dicionarioAluno[resultSet[9]]))
+            return listaReserva
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar todas reserva. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)            
 
     
     def findByAluno(self, aluno: Aluno):
