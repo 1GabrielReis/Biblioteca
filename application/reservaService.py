@@ -113,7 +113,11 @@ def findAll():
 
 
 def findByLivro() :
-    pass
+    print('devolverLivro')
+    id_livro= int(input('Qual o id do livro para encontra sua reservas: '))
+    livro= Livro(id_livro, None, None, None)
+    reservas= reservaDao.findByLivro(livro)
+    print(reservas)
 
 
 def findByAluno():
@@ -124,11 +128,7 @@ def findByAluno():
     print(reservas)
 
 def devolverLivro():
-    print('devolverLivro')
-    id_livro= int(input('Qual o id do livro para encontra sua reservas: '))
-    livro= Livro(id_livro, None, None, None)
-    reservas= reservaDao.findByLivro(livro)
-    print(reservas)
+    pass
 
 def escolha():
     print("""
