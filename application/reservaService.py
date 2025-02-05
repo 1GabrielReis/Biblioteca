@@ -29,7 +29,7 @@ ativo= True
 reservaDao = DaoFactory.createReservaDao()
 converteDataTempo= DataTempo()
 
-def insert():
+def insert(): #1
     print('Teste insert')
     id_aluno=int(input("Id do aluno: "))
     aluno= Aluno(id_aluno, None, None)
@@ -46,7 +46,7 @@ def insert():
     print("Inserido! novo Id: ", reserva.id)
     print(reserva)
     
-def update():
+def update(): #2
     print('Teste update')
     id_reserva= int(input('Qual o id da reserva:'))
     reserva= reservaDao.findById(id_reserva)
@@ -88,17 +88,14 @@ def update():
     print(reserva)
 
 
-
-
-
-def deleteById():
+def deleteById(): #3
     print("test deleteById")
     id_reserva=int(input('Id da reserva: '))
     reservaDao.deleteById(id_reserva)
     print('Delete realizado com sucesso! ')
 
 
-def findById():
+def findById(): #4
     print('test find by id')
     id_reserva= int(input('Qual o Id da reserva: '))
     reserva= reservaDao.findById(id_reserva)
@@ -106,13 +103,13 @@ def findById():
 
 
 
-def findAll():
+def findAll(): #5
     print('test find All')
     reserva: Reserva= reservaDao.findAll()
     print(reserva)
 
 
-def findByLivro() :
+def findByLivro(): #6
     print('devolverLivro')
     id_livro= int(input('Qual o id do livro para encontra sua reservas: '))
     livro= Livro(id_livro, None, None, None)
@@ -120,14 +117,14 @@ def findByLivro() :
     print(reservas)
 
 
-def findByAluno():
+def findByAluno(): #7
     print("findByAluno")
     id_aluno=int(input('Qual o id do aluno para encontra sua reservas: '))
     aluno= Aluno(id_aluno,None, None)
     reservas= reservaDao.findByAluno(aluno)
     print(reservas)
 
-def devolverLivro():
+def returnBook(): #8
     pass
 
 def escolha():
@@ -165,7 +162,7 @@ def sistema():
     elif resposta == 7:
         findByAluno()
     elif resposta == 8:
-        devolverLivro()
+        returnBook()
     elif resposta == 9:
         ativo= False    
     else:
