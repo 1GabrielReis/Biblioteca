@@ -201,6 +201,24 @@ class ReservaDaoSL3(ReservaDao):
             raise DbException(f"Erro ao retona lsita de reservas. \nDetalhes: {erro}")
         finally:
             DB.closeCursor(cursor)
+
+
+    def returnBook(self, reserva: Reserva):
+        cursor= None
+        try:
+            id_reserva, data_entregue = reserva.id, reserva.data_entregue
+            cursor= self.conn.cursor()
+            cursor.execute('''  UPDATE Reservas SET 
+                                data_entregue =  ?
+                                WHERE id_reserva = ?
+                           ''',(data_entregue, id_reserva))
+            self.conn.commit()
+        except sql.Error as erro:
+            raise DbException(f"Erro ao atualizar a data de entrega da reserva. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
+
+            
     
     def _instanciaLivro(self, resultSet):
         id_livro, titulo, autor, editora = resultSet[5], resultSet[6], resultSet[7], resultSet[8]
