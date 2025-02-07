@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from ..entities.avaliacao import Avaliacao
+from ..entities.aluno import Aluno
+from ..entities.livro import Livro
+from ..entities.reserva import Reserva
 
 class ReservaDao(ABC):
     @abstractmethod
@@ -21,5 +24,17 @@ class ReservaDao(ABC):
         pass
 
     @abstractmethod
-    def findAll(self,avaliacao: List[Avaliacao]):
+    def findAll(self) -> List[Avaliacao]:
+        pass
+
+    @abstractmethod
+    def findByAluno(self, avaliacao) -> List[Avaliacao]:
+        pass
+
+    @abstractmethod
+    def findByLivro(self, avaliacao) -> List[Avaliacao]:
+        pass
+
+    @abstractmethod
+    def findByReserva(self, avaliacao) -> List[Avaliacao]:
         pass
