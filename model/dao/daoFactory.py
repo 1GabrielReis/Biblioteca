@@ -3,6 +3,7 @@ from model.dao.impl.alunoDaoSL3 import AlunoDaoSL3
 from model.dao.impl.livroDaoSL3 import LivroDaoSL3
 from model.dao.impl.bibliotecaDaoSL3 import BibliotecaDaoSL3
 from model.dao.impl.reservaDaoSL3 import ReservaDaoSL3
+from model.dao.impl.avaliacaoDaoSL3 import AvaliacaoDaoSL3
 
 class DaoFactory:
     def createAlunoDao():
@@ -16,3 +17,6 @@ class DaoFactory:
     
     def createReservaDao():
         return ReservaDaoSL3(DB.getConn())
+    
+    def createAvaliacaoDao():
+        return AvaliacaoDaoSL3(DB.getConn())
