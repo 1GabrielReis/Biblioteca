@@ -6,7 +6,7 @@ from ..entities.aluno import Aluno
 from ..entities.livro import Livro
 from ..entities.reserva import Reserva
 
-class ReservaDao(ABC):
+class AvaliacaoDao(ABC):
     @abstractmethod
     def insert(self,avaliacao: Avaliacao):
         pass
