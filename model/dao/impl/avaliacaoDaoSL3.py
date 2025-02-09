@@ -1,5 +1,6 @@
 from typing import List
 import sqlite3 as sql
+from datetime import datetime
 
 from model.entities.avaliacao import Avaliacao
 from model.dao.avaliacaoDao import AvaliacaoDao
@@ -77,3 +78,8 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
     def _instanciaLivro(self, resultSet):
         id_livro, titulo, autor, editora= resultSet[7], resultSet[8], resultSet[9], resultSet[10]
         return Livro(id_livro, titulo, autor, editora)   
+    
+    def _converTextoDataSQL(self,dataHora):
+        if dataHora is not None:
+            return datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
+        return None
