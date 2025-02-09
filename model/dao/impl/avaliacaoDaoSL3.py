@@ -50,12 +50,12 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
             bibliotecaReserva= {}
             for resultSet in cursor.execute(resultSetList):
                 if resultSet[2] not in bibliotecaAluno:
-                    pass
+                    bibliotecaAluno.update({resultSet[2]:self._instanciaAluno(resultSet)})
                 if resultSet[6] not in bibliotecaLivro:
-                    pass
+                    bibliotecaLivro.update({resultSet[6]: self._instanciaLivro(resultSet)})
                 if resultSet[11] not in bibliotecaReserva:
-                    pass
-                listaAvalicoes.append()
+                    bibliotecaReserva.update({resultSet[11]: self._instanciaReserva(resultSet)})
+                listaAvalicoes.append(Avaliacao(resultSet[0],resultSet[1],bibliotecaAluno[resultSet[2]],bibliotecaLivro[resultSet[6]],bibliotecaReserva[resultSet[11]]))
             return(listaAvalicoes)
         except sql.Error as erro:
             raise DbException(f"Erro ao buscar todas reserva. \nDetalhes: {erro}")
