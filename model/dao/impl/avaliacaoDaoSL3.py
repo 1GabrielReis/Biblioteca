@@ -29,7 +29,37 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         pass
 
     def findAll(self) -> List[Avaliacao]:
-        pass
+        cursor= None
+        try:
+            cursor= self.conn.cursor()
+            resultSetList='''
+                            SELECT 
+                            avaliar_livro.id_avaliar, avaliar_livro.nota,
+                            avaliar_livro.id_aluno, alunos.id_usuario, alunos.nome, alunos.sobrenome, 
+                            avaliar_livro.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora, 
+                            avaliar_livro.id_reserva, Reservas.id_reserva, Reservas.data_inicial,  Reservas.data_final, Reservas.data_entregue, Reservas.id_aluno, Reservas.id_livro
+                            FROM avaliar_livro
+                            INNER JOIN alunos ON avaliar_livro.id_aluno = alunos.id_usuario
+                            INNER JOIN livros ON avaliar_livro.id_livro = livros.id_livro
+                            INNER JOIN Reservas ON avaliar_livro.id_reserva = Reservas.id_reserva;
+                           '''
+            listaAvalicoes= List()
+            bibliotecaAluno= {}
+            bibliotecaLivro= {}
+            bibliotecaReserva= {}
+            for resultSet in cursor.execute(resultSetList):
+                if resultSet[2] not in bibliotecaAluno:
+                    pass
+                if resultSet[6] not in bibliotecaLivro:
+                    pass
+                if resultSet[11] not in bibliotecaReserva:
+                    pass
+                listaAvalicoes.append()
+            return(listaAvalicoes)
+        except:
+            pass
+        finally:
+            DB.closeCursor(cursor)
 
     def findByAluno(self, avaliacao) -> List[Avaliacao]:
         pass
