@@ -69,3 +69,7 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
 
     def findByReserva(self, avaliacao) -> List[Avaliacao]:
         pass
+
+    def _instanciaALuno(self, resultSet):
+        id_aluno, nome, sobrenome = resultSet[3], resultSet[4], resultSet[5]
+        return Aluno(id_aluno, nome, sobrenome)
