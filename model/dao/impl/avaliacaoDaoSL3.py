@@ -55,7 +55,7 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
                     bibliotecaLivro.update({resultSet[6]: self._instanciaLivro(resultSet)})
                 if resultSet[11] not in bibliotecaReserva:
                     bibliotecaReserva.update({resultSet[11]: self._instanciaReserva(resultSet, bibliotecaLivro[resultSet[6]], bibliotecaAluno[resultSet[2]])})
-                listaAvalicoes.append(Avaliacao(resultSet[0], resultSet[1], bibliotecaAluno[resultSet[2]], bibliotecaLivro[resultSet[6]], bibliotecaReserva[resultSet[11]]))
+                listaAvalicoes.append(self._instaciaAvaliacao(resultSet,bibliotecaReserva[resultSet[11]]))
             return listaAvalicoes
         except sql.Error as erro:
             raise DbException(f"Erro ao buscar todas reserva. \nDetalhes: {erro}")
@@ -79,16 +79,22 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         id_livro, titulo, autor, editora= resultSet[7], resultSet[8], resultSet[9], resultSet[10]
         return Livro(id_livro, titulo, autor, editora)   
     
-    def _instanciaReserva(self, resulSte, livro, aluno):
-        id_reserva = resulSte[12]
-        data_inicial= self._converTextoDataSQL(resulSte[13])
-        data_final =  self._converTextoDataSQL(resulSte[14])
-        data_entregue = self._converTextoDataSQL(resulSte[15]) 
+    def _instanciaReserva(self, resultSet, livro, aluno):
+        id_reserva = resultSet[12]
+        data_inicial= self._converTextoDataSQL(resultSet[13])
+        data_final =  self._converTextoDataSQL(resultSet[14])
+        data_entregue = self._converTextoDataSQL(resultSet[15]) 
         livro= livro
         aluno= aluno
         return Reserva(id_reserva, livro, aluno, data_inicial, data_final, data_entregue)
         
-
+    def _instaciaAvaliacao(self, resultSet, reserva: Reserva):
+        id_avaliacao=resultSet[0]
+        nota=resultSet[1]
+        aluno= reserva.aluno
+        livro= reserva.livro
+        reserva= reserva
+        return Avaliacao(id_avaliacao, nota, aluno, livro, reserva)
 
     def _converTextoDataSQL(self,dataHora):
         if dataHora is not None:
