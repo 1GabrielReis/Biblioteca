@@ -54,7 +54,7 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
                 if resultSet[6] not in bibliotecaLivro:
                     bibliotecaLivro.update({resultSet[6]: self._instanciaLivro(resultSet)})
                 if resultSet[11] not in bibliotecaReserva:
-                    bibliotecaReserva.update({resultSet[11]: self._instanciaReserva(resultSet)})
+                    bibliotecaReserva.update({resultSet[11]: self._instanciaReserva(resultSet, bibliotecaLivro[resultSet[6]], bibliotecaAluno[resultSet[2]])})
                 listaAvalicoes.append(Avaliacao(resultSet[0], resultSet[1], bibliotecaAluno[resultSet[2]], bibliotecaLivro[resultSet[6]], bibliotecaReserva[resultSet[11]]))
             return listaAvalicoes
         except sql.Error as erro:
@@ -79,9 +79,15 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         id_livro, titulo, autor, editora= resultSet[7], resultSet[8], resultSet[9], resultSet[10]
         return Livro(id_livro, titulo, autor, editora)   
     
-    def _instanciaReserva(self, resulSte):
-        #id_reserva, data_inicial, data_final, data_entregue, aluno, livro
-        pass
+    def _instanciaReserva(self, resulSte, livro, aluno):
+        id_reserva = resulSte[12]
+        data_inicial= self._converTextoDataSQL(resulSte[13])
+        data_final =  self._converTextoDataSQL(resulSte[14])
+        data_entregue = self._converTextoDataSQL(resulSte[15]) 
+        livro= livro
+        aluno= aluno
+        return Reserva(id_reserva, livro, aluno, data_inicial, data_final, data_entregue)
+        
 
 
     def _converTextoDataSQL(self,dataHora):
