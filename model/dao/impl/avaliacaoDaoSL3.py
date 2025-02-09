@@ -56,8 +56,8 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
                     pass
                 listaAvalicoes.append()
             return(listaAvalicoes)
-        except:
-            pass
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar todas reserva. \nDetalhes: {erro}")
         finally:
             DB.closeCursor(cursor)
 
