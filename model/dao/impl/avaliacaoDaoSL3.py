@@ -79,6 +79,13 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         id_livro, titulo, autor, editora= resultSet[7], resultSet[8], resultSet[9], resultSet[10]
         return Livro(id_livro, titulo, autor, editora)   
     
+    def _instanciaReserva(self, resulSte):
+        id_reserva, data_inicial,  data_final, data_entregue, id_aluno, id_livro = resulSte[12], 
+        self._converTextoDataSQL(resulSte[13]), self._converTextoDataSQL(resulSte[14]), self._converTextoDataSQL(resulSte[15]), 
+        resulSte[16], resulSte[17]
+        return Reserva(id_reserva, data_inicial, data_final, data_entregue, id_aluno, id_livro)
+
+
     def _converTextoDataSQL(self,dataHora):
         if dataHora is not None:
             return datetime.strptime(dataHora,"%Y-%m-%d %H:%M:%S")
