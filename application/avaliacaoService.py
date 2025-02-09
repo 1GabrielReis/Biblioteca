@@ -21,8 +21,11 @@ def deleteById(self,id: int):
 def findById(self,id: int):
     pass
 
-def findAll(self) -> List[Avaliacao]:
-    pass
+def findAll(self):
+    print('Test find All')
+    avaliacoes: List[Avaliacao]= avaliacaoDao.findAll()
+    print(avaliacoes)
+
 
 def findByAluno(self, avaliacao) -> List[Avaliacao]:
     pass
