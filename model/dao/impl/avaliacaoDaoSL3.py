@@ -44,7 +44,7 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
                             INNER JOIN livros ON avaliar_livro.id_livro = livros.id_livro
                             INNER JOIN Reservas ON avaliar_livro.id_reserva = Reservas.id_reserva;
                            '''
-            listaAvalicoes= List()
+            listaAvalicoes= list()
             bibliotecaAluno= {}
             bibliotecaLivro= {}
             bibliotecaReserva= {}
@@ -55,8 +55,8 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
                     bibliotecaLivro.update({resultSet[6]: self._instanciaLivro(resultSet)})
                 if resultSet[11] not in bibliotecaReserva:
                     bibliotecaReserva.update({resultSet[11]: self._instanciaReserva(resultSet)})
-                listaAvalicoes.append(Avaliacao(resultSet[0],resultSet[1],bibliotecaAluno[resultSet[2]],bibliotecaLivro[resultSet[6]],bibliotecaReserva[resultSet[11]]))
-            return(listaAvalicoes)
+                listaAvalicoes.append(Avaliacao(resultSet[0], resultSet[1], bibliotecaAluno[resultSet[2]], bibliotecaLivro[resultSet[6]], bibliotecaReserva[resultSet[11]]))
+            return listaAvalicoes
         except sql.Error as erro:
             raise DbException(f"Erro ao buscar todas reserva. \nDetalhes: {erro}")
         finally:
@@ -80,10 +80,8 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         return Livro(id_livro, titulo, autor, editora)   
     
     def _instanciaReserva(self, resulSte):
-        id_reserva, data_inicial,  data_final, data_entregue, id_aluno, id_livro = resulSte[12], 
-        self._converTextoDataSQL(resulSte[13]), self._converTextoDataSQL(resulSte[14]), self._converTextoDataSQL(resulSte[15]), 
-        resulSte[16], resulSte[17]
-        return Reserva(id_reserva, data_inicial, data_final, data_entregue, id_aluno, id_livro)
+        #id_reserva, data_inicial, data_final, data_entregue, aluno, livro
+        pass
 
 
     def _converTextoDataSQL(self,dataHora):

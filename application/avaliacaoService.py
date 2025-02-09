@@ -9,31 +9,31 @@ from model.dao.daoFactory import DaoFactory
 ativo= True
 avaliacaoDao= DaoFactory.createAvaliacaoDao()
 
-def insert(self,avaliacao: Avaliacao):
+def insert():
     pass
 
-def update(self,avaliacao: Avaliacao):
+def update():
     pass
 
-def deleteById(self,id: int):
+def deleteById():
     pass
 
-def findById(self,id: int):
+def findById():
     pass
 
-def findAll(self):
+def findAll():
     print('Test find All')
     avaliacoes: List[Avaliacao]= avaliacaoDao.findAll()
     print(avaliacoes)
 
 
-def findByAluno(self, avaliacao) -> List[Avaliacao]:
+def findByAluno():
     pass
 
-def findByLivro(self, avaliacao) -> List[Avaliacao]:
+def findByLivro():
     pass
 
-def findByReserva(self, avaliacao) -> List[Avaliacao]:
+def findByReserva():
     pass
 
 def escolha():
