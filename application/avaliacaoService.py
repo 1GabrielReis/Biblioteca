@@ -2,7 +2,7 @@ from typing import List
 
 from model.entities.avaliacao import Avaliacao
 from model.entities.aluno import Aluno
-from model.entities.biblioteca import Biblioteca
+from model.entities.livro import Livro
 from model.entities.reserva import Reserva
 from model.dao.daoFactory import DaoFactory
 
@@ -38,7 +38,11 @@ def findByAluno():
     print(avaliacoes)
 
 def findByLivro():
-    pass
+    print('find By Livro')
+    id_livro= int(input('Qual o id do livro: '))
+    livro= Livro(id_livro, None, None, None, None)
+    avaliacoes= avaliacaoDao.findByAluno(livro)
+    print(avaliacoes)
 
 def findByReserva():
     pass
