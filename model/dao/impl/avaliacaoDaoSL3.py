@@ -27,7 +27,32 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         pass
 
     def findById(self,id: int):
-        pass
+        cursor= None
+        try:
+            cursor= self.conn.cursor()
+            cursor.execute('''
+                            SELECT 
+                            avaliar_livro.id_avaliar, avaliar_livro.nota,
+                            avaliar_livro.id_aluno, alunos.id_usuario, alunos.nome, alunos.sobrenome, 
+                            avaliar_livro.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora, 
+                            avaliar_livro.id_reserva, Reservas.id_reserva, Reservas.data_inicial,  Reservas.data_final, Reservas.data_entregue, Reservas.id_aluno, Reservas.id_livro
+                            FROM avaliar_livro
+                            INNER JOIN alunos ON avaliar_livro.id_aluno = alunos.id_usuario
+                            INNER JOIN livros ON avaliar_livro.id_livro = livros.id_livro
+                            INNER JOIN Reservas ON avaliar_livro.id_reserva = Reservas.id_reserva
+                            WHERE avaliar_livro.id_avaliar = ?;
+                        ''',(id,))
+            resultSet=cursor.fetchone()
+            if resultSet is not None:
+                aluno= self._instanciaAluno(resultSet)
+                livro= self._instanciaLivro(resultSet)
+                reserva= self._instanciaReserva(resultSet, livro, aluno)
+                return self._instaciaAvaliacao(resultSet, reserva)
+            return None
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar avaição do livro. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     def findAll(self) -> List[Avaliacao]:
         cursor= None
