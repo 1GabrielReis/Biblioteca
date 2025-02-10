@@ -122,8 +122,40 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         finally:
             DB.closeCursor(cursor)
 
-    def findByLivro(self, avaliacao) -> List[Avaliacao]:
-        pass
+    def findByLivro(self, livro: Livro) -> List[Avaliacao]:
+        cursor= None
+        try:
+            id_livro= livro.id
+            cursor= self.conn.cursor()
+            resultSetList='''
+                            SELECT 
+                            avaliar_livro.id_avaliar, avaliar_livro.nota,
+                            avaliar_livro.id_aluno, alunos.id_usuario, alunos.nome, alunos.sobrenome, 
+                            avaliar_livro.id_livro, livros.id_livro, livros.titulo, livros.autor, livros.editora, 
+                            avaliar_livro.id_reserva, Reservas.id_reserva, Reservas.data_inicial,  Reservas.data_final, Reservas.data_entregue, Reservas.id_aluno, Reservas.id_livro
+                            FROM avaliar_livro
+                            INNER JOIN alunos ON avaliar_livro.id_aluno = alunos.id_usuario
+                            INNER JOIN livros ON avaliar_livro.id_livro = livros.id_livro
+                            INNER JOIN Reservas ON avaliar_livro.id_reserva = Reservas.id_reserva
+                            WHERE avaliar_livro.id_livro = ?
+                           '''
+            listaAvalicoes= list()
+            bibliotecaAluno= {}
+            bibliotecaLivro= {}
+            bibliotecaReserva= {}
+            for resultSet in cursor.execute(resultSetList,(id_livro,)):
+                if resultSet[2] not in bibliotecaAluno:
+                    bibliotecaAluno.update({resultSet[2]:self._instanciaAluno(resultSet)})
+                if resultSet[6] not in bibliotecaLivro:
+                    bibliotecaLivro.update({resultSet[6]: self._instanciaLivro(resultSet)})
+                if resultSet[11] not in bibliotecaReserva:
+                    bibliotecaReserva.update({resultSet[11]: self._instanciaReserva(resultSet, bibliotecaLivro[resultSet[6]], bibliotecaAluno[resultSet[2]])})
+                listaAvalicoes.append(self._instaciaAvaliacao(resultSet,bibliotecaReserva[resultSet[11]]))
+            return listaAvalicoes
+        except sql.Error as erro:
+            raise DbException(f"Erro ao retona lsita de reservas. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     def findByReserva(self, avaliacao) -> List[Avaliacao]:
         pass
