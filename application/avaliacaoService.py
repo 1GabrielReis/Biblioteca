@@ -20,7 +20,7 @@ def deleteById():
 
 def findById():
     print('Test find By Id')
-    id_avaliacao= int(input(" QuAL Id da avalição: "))
+    id_avaliacao= int(input(" Qual Id da avalição: "))
     avaliacao= avaliacaoDao.findById(id_avaliacao)
     print(avaliacao)
 
@@ -31,7 +31,11 @@ def findAll():
 
 
 def findByAluno():
-    pass
+    print('find By Aluno')
+    id_aluno= int(input('Qual o id do aluno: '))
+    aluno= Aluno(id_aluno, None, None)
+    avaliacoes= avaliacaoDao.findByAluno(aluno)
+    print(avaliacoes)
 
 def findByLivro():
     pass
