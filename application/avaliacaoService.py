@@ -23,7 +23,29 @@ def insert():
     print("Inserido! novo Id: ", avaliacao.id)
 
 def update():
-    pass
+    print('updat')
+    id_avaliacao=int(input('Id da avalição do livro: '))
+    avaliacao: Avaliacao= avaliacaoDao.findById(id_avaliacao)
+    atributo=int(input("""
+                   Qual atributo você desja alterar:
+                   1- nota do livro
+                   2- id do aluno
+                   3- id do livro
+                   4- id do reserva
+                   """))
+    if atributo == 1:
+        avaliacao.nota= int(input('Qual a avalição do ',avaliacao.livro.titutlo,':'))
+    elif atributo == 2:
+        avaliacao.aluno.id= int(input('Qual o id do aluno: '))
+    elif atributo == 3:
+        avaliacao.livro.id= int(input('Qual O ID do livro: '))
+    elif atributo == 4:
+        avaliacao.reserva.id= int(input('QuaL O ID da Reserva: '))
+    else:
+        raise ValueError("Idade inválida. Deve estar entre 1 a 4")
+    avaliacaoDao.update(avaliacao)
+    avaliacao= avaliacaoDao.findById(id_avaliacao)
+    print(avaliacao)
 
 def deleteById():
     pass
