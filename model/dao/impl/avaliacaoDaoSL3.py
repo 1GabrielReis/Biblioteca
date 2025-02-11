@@ -18,7 +18,21 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         self.conn= conn
 
     def insert(self,avaliacao: Avaliacao):
-        pass
+        cursor= None
+        try:
+            nota, id_aluno, id_livro, id_reserva= avaliacao.nota, avaliacao.aluno.id, avaliacao.livro.id, avaliacao.reserva.id
+            cursor= self.conn.cursor()
+            cursor.execute('INSERT INTO avaliar_livro(nota, id_aluno, id_livro, id_reserva) VALUES (?, ?, ?, ?)',
+                           (nota, id_aluno, id_livro, id_reserva))
+            self.conn.commit()
+            if cursor.rowcount > 0:
+                avaliacao.id=cursor.lastrowid
+            else:
+                raise DbException(f"Erro, não foi possivel inserir os dados")
+        except sql.Error as erro:
+            raise DbException(f"Erro ao avaliação livro. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     def update(self,avaliacao: Avaliacao):
         pass
