@@ -10,7 +10,17 @@ ativo= True
 avaliacaoDao= DaoFactory.createAvaliacaoDao()
 
 def insert():
-    pass
+    print('Test insert')
+    id_aluno= int(input('Id do aluno: '))
+    id_livro= int(input('Id do livro: '))
+    id_reserva= int(input('Id da reserva: '))
+    nota_livro= int(input('Nota ao livro: '))
+    aluno= Aluno(id_aluno, None, None)
+    livro= Livro(id_livro, None, None, None)
+    reserva= Reserva(id_reserva, None, None, None, None, None)
+    avaliacao= Avaliacao(None, nota_livro, aluno, livro, reserva)
+    avaliacaoDao.insert(avaliacao)
+    print("Inserido! novo Id: ", avaliacao.id)
 
 def update():
     pass
