@@ -35,7 +35,18 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
             DB.closeCursor(cursor)
 
     def update(self,avaliacao: Avaliacao):
-        pass
+        cursor= None
+        try:
+            id_avalicao ,nota, id_aluno, id_livro, id_reserva= avaliacao.id ,avaliacao.nota, avaliacao.aluno.id, avaliacao.livro.id, avaliacao.reserva.id
+            cursor= self.conn.cursor()
+            cursor.execute('''  UPDATE avaliar_livro
+                                SET  nota= ?, id_aluno= ?, id_livro= ?, id_reserva= ?
+                                WHERE id_avaliar= ?; ''',(nota, id_aluno, id_livro, id_reserva, id_avalicao))
+            self.conn.commit()
+        except sql.Error as erro:
+            raise DbException(f"Erro ao atualizar avaliação do livro. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
 
     def deleteById(self,id: int):
         pass
