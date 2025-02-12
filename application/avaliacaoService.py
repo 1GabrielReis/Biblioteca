@@ -48,7 +48,10 @@ def update():
     print(avaliacao)
 
 def deleteById():
-    pass
+    print('Test delete By Id')
+    id_avalicao=int(input('id da avaliação: '))
+    avaliacaoDao.deleteById(id_avalicao)
+    print('Delete realizado com sucesso! ')
 
 def findById():
     print('Test find By Id')
