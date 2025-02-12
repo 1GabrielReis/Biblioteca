@@ -34,7 +34,7 @@ def update():
                    4- id do reserva
                    """))
     if atributo == 1:
-        avaliacao.nota= int(input('Qual a avalição do ',avaliacao.livro.titutlo,':'))
+        avaliacao.nota= int(input('Qual a avalição do '+ avaliacao.livro.titutlo +': '))
     elif atributo == 2:
         avaliacao.aluno.id= int(input('Qual o id do aluno: '))
     elif atributo == 3:
