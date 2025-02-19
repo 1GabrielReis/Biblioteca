@@ -4,12 +4,12 @@ from abc import ABC, abstractmethod
 
 from model.entities.aluno import Aluno
 from model.entities.biblioteca import Biblioteca
-from model.dao.daoFactory import DaoFactory
-from model.dao.bibliotecaDao import BibliotecaDao
+
+from service.bibliotecaService import BibliotecaService
 
 
 ativo= True
-bibliotecaDao = DaoFactory.createBibliotecaDao()
+bibliotecaDao = BibliotecaService()
 
 def insert():
     print('Teste insert')
