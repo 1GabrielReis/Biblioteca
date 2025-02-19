@@ -2,12 +2,11 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from model.dao.daoFactory import DaoFactory
 from model.entities.livro import Livro
-from model.dao.livroDao import LivroDao
+from service.livroService import LivroService
 
 ativo= True
-livroDao= DaoFactory.createLivroDao()
+livroDao= LivroService()
 
 def insert():
     print('Teste insert')
