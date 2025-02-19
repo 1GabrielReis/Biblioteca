@@ -27,9 +27,13 @@ class ReservaDao(ABC):
         pass
 
     @abstractmethod
-    def findByLivro(self) -> List[Livro]:
+    def findByLivro(self, livro: Livro) -> List[Livro]:
         pass
 
     @abstractmethod
-    def findByAluno(self) -> List[Aluno]:
+    def findByAluno(self, aluno: Aluno) -> List[Aluno]:
+        pass
+
+    @abstractmethod
+    def returnBook(self, reserva: Reserva):
         pass

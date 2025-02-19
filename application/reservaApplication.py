@@ -5,8 +5,8 @@ from datetime import datetime
 from model.entities.livro import Livro
 from model.entities.aluno import Aluno
 from model.entities.reserva import Reserva
-from model.dao.daoFactory import DaoFactory
-from model.dao.reservaDao import Reserva
+
+from service.reservaService import ReservaService
 
 class ClassAbstrata(ABC):
     @abstractmethod
@@ -26,7 +26,7 @@ class DataTempo(ClassAbstrata):
         return self._converteDataTexto(data)    
 
 ativo= True
-reservaDao = DaoFactory.createReservaDao()
+reservaDao = ReservaService()
 converteDataTempo= DataTempo()
 
 def insert(): #1
