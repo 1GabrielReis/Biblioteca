@@ -4,10 +4,11 @@ from model.entities.avaliacao import Avaliacao
 from model.entities.aluno import Aluno
 from model.entities.livro import Livro
 from model.entities.reserva import Reserva
-from model.dao.daoFactory import DaoFactory
+
+from service.avaliacaoService import AvaliacaoService
 
 ativo= True
-avaliacaoDao= DaoFactory.createAvaliacaoDao()
+avaliacaoDao= AvaliacaoService()
 
 def insert():
     print('Test insert')
