@@ -2,11 +2,10 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from model.entities.aluno import Aluno
-from model.dao.daoFactory import DaoFactory
-from model.dao.alunoDao import AlunoDao
+from service.alunoService import AlunoService
 
 ativo= True
-alunoDao= DaoFactory.createAlunoDao()
+alunoDao= AlunoService()
 
 def insert():
     print('Teste insert')

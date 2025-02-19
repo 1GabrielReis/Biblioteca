@@ -21,5 +21,5 @@ class AlunoDao(ABC):
         pass
 
     @abstractmethod
-    def findAll(self,aluno: List[Aluno]):
+    def findAll(self):
         pass
