@@ -1,15 +1,17 @@
 from ..controller_base import Controller_base
 from ...models.service.alunoService import AlunoService
+from ...view.view_entities.response_aluno import Response_aluno
 
 class Controller_aluno(Controller_base):
     def __init__(self):
+        self.model= AlunoService()
+        self.view= Response_aluno(self)
+
+    def insert(self, data):
         pass
 
-    def insert(self, service):
-        pass
 
-
-    def update(self, service):
+    def update(self, data):
         pass
 
 

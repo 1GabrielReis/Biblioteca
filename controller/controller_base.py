@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 class Controller_base(ABC):
 
     @abstractmethod
-    def insert(self, service):
+    def insert(self, data):
         pass
 
     @abstractmethod
-    def update(self, service):
+    def update(self, data):
         pass
 
     @abstractmethod
