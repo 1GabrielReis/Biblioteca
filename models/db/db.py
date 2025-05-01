@@ -9,7 +9,7 @@ class DB:
     def loadProperties():
         if DB.conn is None:
             try:
-                DB.conn = sql.connect('Biblioteca.db')
+                DB.conn = sql.connect('Biblioteca.db', check_same_thread=False)
                 return DB.conn
             except sql.Error as erro:
                 raise DbException(f"Erro ao conectar ao banco de dados: {erro}")
