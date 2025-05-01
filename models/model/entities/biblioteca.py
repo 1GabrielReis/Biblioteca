@@ -1,6 +1,6 @@
 from typing import List
 
-from model.entities.aluno import Aluno
+from .aluno import Aluno
 
 class Biblioteca:
     def __init__(self,id,nota,aluno: Aluno):

@@ -2,14 +2,14 @@ from typing import List
 import sqlite3 as sql
 from datetime import datetime
 
-from model.entities.reserva import Reserva
-from model.dao.reservaDao import ReservaDao
+from ...entities.reserva import Reserva
+from ...dao.reservaDao import ReservaDao
 
-from model.entities.livro import Livro
-from model.entities.aluno import Aluno
+from ...entities.livro import Livro
+from ...entities.aluno import Aluno
 
-from db.db import DB
-from db.dbException import DbException
+from ....db.db import DB
+from ....db.dbException import DbException
 
 class ReservaDaoSL3(ReservaDao):
     def __init__(self,conn):

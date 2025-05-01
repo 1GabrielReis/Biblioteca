@@ -1,6 +1,6 @@
-from model.entities.livro import Livro
-from model.entities.aluno import Aluno
-from model.entities.reserva import Reserva
+from .livro import Livro
+from .aluno import Aluno
+from .reserva import Reserva
 
 from typing import List
 

@@ -1,9 +1,9 @@
 from typing import List
 
-from model.entities.aluno import Aluno
-from model.dao.alunoDao import AlunoDao
+from ..model.entities.aluno import Aluno
+from ..model.dao.alunoDao import AlunoDao
 
-from model.dao.daoFactory import DaoFactory
+from ..model.dao.daoFactory import DaoFactory
 
 class AlunoService(AlunoDao):
     def __init__(self):

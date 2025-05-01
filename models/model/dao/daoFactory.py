@@ -1,9 +1,9 @@
-from db.db import DB
-from model.dao.impl.alunoDaoSL3 import AlunoDaoSL3
-from model.dao.impl.livroDaoSL3 import LivroDaoSL3
-from model.dao.impl.bibliotecaDaoSL3 import BibliotecaDaoSL3
-from model.dao.impl.reservaDaoSL3 import ReservaDaoSL3
-from model.dao.impl.avaliacaoDaoSL3 import AvaliacaoDaoSL3
+from ...db.db import DB
+from .impl.alunoDaoSL3 import AlunoDaoSL3
+from .impl.livroDaoSL3 import LivroDaoSL3
+from .impl.bibliotecaDaoSL3 import BibliotecaDaoSL3
+from .impl.reservaDaoSL3 import ReservaDaoSL3
+from .impl.avaliacaoDaoSL3 import AvaliacaoDaoSL3
 
 class DaoFactory:
     def createAlunoDao():

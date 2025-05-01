@@ -1,13 +1,13 @@
 from typing import List
 import sqlite3 as sql
 
-from model.entities.biblioteca import Biblioteca
-from model.dao.bibliotecaDao import BibliotecaDao
+from ...entities.biblioteca import Biblioteca
+from ...dao.bibliotecaDao import BibliotecaDao
 
-from model.entities.aluno import Aluno
+from ...entities.aluno import Aluno
 
-from db.db import DB
-from db.dbException import DbException
+from ....db.db import DB
+from ....db.dbException import DbException
 
 class BibliotecaDaoSL3(BibliotecaDao):
     

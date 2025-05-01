@@ -1,10 +1,10 @@
 from typing import List
 import sqlite3 as sql
 
-from model.entities.aluno import Aluno
-from model.dao.alunoDao import AlunoDao
-from db.dbException import DbException
-from db.db import DB
+from ...entities.aluno import Aluno
+from ...dao.alunoDao import AlunoDao
+from ....db.dbException import DbException
+from ....db.db import DB
 
 class AlunoDaoSL3(AlunoDao):
     def __init__(self,conn): #conn = DB

@@ -3,13 +3,9 @@ from abc import ABC, abstractmethod
 class Response_base(ABC):
 
     @abstractmethod
-    def build_list(self, lista):
+    def format(data):
         pass
 
     @abstractmethod
-    def build_detail(self, obj):
-        pass
-
-    @abstractmethod
-    def serialize(self, obj):
+    def format_list(data):
         pass
