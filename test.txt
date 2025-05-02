@@ -1,0 +1,17 @@
+import sqlite3
+
+db_path = r"D:\Gabriel SSD\SENAI BACK-END\atividade\projeto_biblioteca\models\Biblioteca.db"
+conn = sqlite3.connect(db_path)
+cursor = conn.cursor()
+
+# Lista todas as tabelas
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+tabelas = cursor.fetchall()
+print("Tabelas no banco:", tabelas)
+
+# Mostra as colunas da tabela alunos
+cursor.execute("PRAGMA table_info(alunos);")
+colunas = cursor.fetchall()
+print("Estrutura da tabela 'alunos':", colunas)
+
+conn.close()

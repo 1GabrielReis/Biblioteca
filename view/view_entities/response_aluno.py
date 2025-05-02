@@ -8,8 +8,7 @@ class Response_aluno(Response_base):
             "dados": {
                 "id": aluno.id,
                 "nome": aluno.nome,
-                "email": aluno.email,
-                "ativo": aluno.ativo
+                "sobrenome": aluno.sobrenome
             }
         }
 
@@ -17,5 +16,5 @@ class Response_aluno(Response_base):
         return {
             "status": "sucesso",
             "quantidade": len(alunos),
-            "dados": [self.format(aluno)["dados"] for aluno in alunos]
+            "dados": [self.format(aluno)["dados"] for aluno in alunos] if alunos else []
         }

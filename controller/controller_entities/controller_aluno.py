@@ -17,6 +17,8 @@ class Controller_aluno(Controller_base):
         def listar_alunos():
             try:
                 alunos = self.service.findAll()
+                if not alunos:
+                    return {"mensagem": "Nenhum aluno encontrado"}
                 return self.response.format_list(alunos)
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao listar alunos: {str(e)}")
