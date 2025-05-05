@@ -13,7 +13,7 @@ class Controller_aluno(Controller_base):
 
     def register_routes(self):
 
-        @self.router_aluno.get("/listar")
+        @self.router_aluno.get("/alunos")
         def listar_alunos():
             try:
                 alunos = self.service.findAll()
@@ -23,7 +23,7 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao listar alunos: {str(e)}")
 
-        @self.router_aluno.get("/{id}")
+        @self.router_aluno.get("/aluno/{id}")
         def buscar_aluno(id: int):
             try:
                 aluno = self.service.findById(id)
