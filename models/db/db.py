@@ -12,7 +12,6 @@ class DB:
             try:
                 db_path = r"D:\Gabriel SSD\SENAI BACK-END\atividade\projeto_biblioteca\models\Biblioteca.db"
                 DB.conn = sql.connect(db_path, check_same_thread=False)
-                print("[DEBUG] Banco usado:", os.path.abspath(db_path))
                 return DB.conn
             except sql.Error as erro:
                 raise DbException(f"Erro ao conectar ao banco de dados: {erro}")
