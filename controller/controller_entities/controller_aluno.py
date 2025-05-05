@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException
 
 from ..controller_base import Controller_base
-from ...models.service.alunoService import AlunoService
 from ...view.view_entities.response_aluno import Response_aluno
+from ...models.service.alunoService import AlunoService
+from ...models.schemas.aluno_schema import AlunoCreate
+from ...models.model.entities.aluno import Aluno
 
 class Controller_aluno(Controller_base):
     def __init__(self):
@@ -13,7 +15,7 @@ class Controller_aluno(Controller_base):
 
     def register_routes(self):
 
-        @self.router_aluno.get("/alunos")
+        @self.router_aluno.get("/findAll")
         def listar_alunos():
             try:
                 alunos = self.service.findAll()
@@ -23,7 +25,7 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao listar alunos: {str(e)}")
 
-        @self.router_aluno.get("/aluno/{id}")
+        @self.router_aluno.get("/findById/{id}")
         def buscar_aluno(id: int):
             try:
                 aluno = self.service.findById(id)
@@ -33,15 +35,16 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao buscar aluno: {str(e)}")
 
-        @self.router_aluno.post("/")
-        def criar_aluno(data: dict):
+        @self.router_aluno.post("/insert", status_code=201)
+        def criar_aluno(aluno: AlunoCreate):
             try:
-                novo_aluno = self.service.insert(data)
+                novo_aluno= Aluno(id= None, nome= aluno.nome, sobrenome= aluno.sobrenome)
+                self.service.insert(novo_aluno)
                 return self.response.format(novo_aluno)
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
 
-        @self.router_aluno.put("/")
+        @self.router_aluno.put("/update")
         def atualizar_aluno(data: dict):
             try:
                 aluno_atualizado = self.service.update(data)
@@ -49,7 +52,7 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao atualizar aluno: {str(e)}")
 
-        @self.router_aluno.delete("/{id}")
+        @self.router_aluno.delete("/deleteById/{id}")
         def deletar_aluno(id: int):
             try:
                 self.service.deleteById(id)
