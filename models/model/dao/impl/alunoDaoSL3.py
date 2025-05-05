@@ -24,6 +24,7 @@ class AlunoDaoSL3(AlunoDao):
             self.conn.commit()
             if cursor.rowcount > 0:
                 aluno.id=cursor.lastrowid
+                return aluno
             else:
                 raise DbException(f"Erro, não foi possivel inserir os dados")
         except sql.Error as erro:
