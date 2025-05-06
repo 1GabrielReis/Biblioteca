@@ -1,0 +1,11 @@
+# Ignorar arquivos compilados pelo Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Banco de dados SQLite 
+*.db
+
+# Ambiente virtual (se estiver dentro do projeto)
+venv/
+.env/
