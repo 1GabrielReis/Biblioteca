@@ -8,4 +8,4 @@ __pycache__/
 
 # Ambiente virtual (se estiver dentro do projeto)
 venv/
-.env/
+.env
