@@ -3,6 +3,8 @@ from typing import List
 from ..model.entities.aluno import Aluno
 from ..model.dao.alunoDao import AlunoDao
 
+from ..schemas.aluno_schema import AlunoCreate
+
 from ..model.dao.daoFactory import DaoFactory
 
 from .serviceException import ServiceException
@@ -42,3 +44,6 @@ class AlunoService(AlunoDao):
             return alunos if alunos else []
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todos os alunos. \nDetalhes: {e}")
+        
+    def instanceObject(self, aluno: AlunoCreate) -> Aluno:
+        return Aluno(id= None, nome= aluno.nome, sobrenome= aluno.sobrenome)

@@ -4,7 +4,6 @@ from ..controller_base import Controller_base
 from ...view.view_entities.response_aluno import Response_aluno
 from ...models.service.alunoService import AlunoService
 from ...models.schemas.aluno_schema import AlunoCreate
-from ...models.model.entities.aluno import Aluno
 
 class Controller_aluno(Controller_base):
     def __init__(self):
@@ -38,7 +37,7 @@ class Controller_aluno(Controller_base):
         @self.router_aluno.post("/insert", status_code=201)
         def criar_aluno(aluno: AlunoCreate):
             try:
-                novo_aluno= Aluno(id= None, nome= aluno.nome, sobrenome= aluno.sobrenome)
+                novo_aluno= self.service.instanceObject(aluno)
                 self.service.insert(novo_aluno)
                 return self.response.format(novo_aluno)
             except Exception as e:
