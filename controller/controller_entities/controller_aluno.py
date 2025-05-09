@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import Response
 
 from ..controller_base import Controller_base
 from ...view.view_entities.response_aluno import Response_aluno
@@ -52,10 +53,10 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao atualizar aluno: {str(e)}")
 
-        @self.router_aluno.delete("/deleteById/{id}")
+        @self.router_aluno.delete("/deleteById/{id}", status_code=204)
         def deletar_aluno(id: int):
             try:
                 self.service.deleteById(id)
-                return {"mensagem": "Aluno deletado com sucesso"}
+                return Response(status_code=204)
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao deletar aluno: {str(e)}")
