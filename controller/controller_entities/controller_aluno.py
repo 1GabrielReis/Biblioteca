@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from ..controller_base import Controller_base
 from ...view.view_entities.response_aluno import Response_aluno
 from ...models.service.alunoService import AlunoService
-from ...models.schemas.aluno_schema import AlunoCreate
+from ...models.schemas.aluno_schema import Aluno_Schema
 
 class Controller_aluno(Controller_base):
     def __init__(self):
@@ -35,7 +35,7 @@ class Controller_aluno(Controller_base):
                 raise HTTPException(status_code=500, detail=f"Erro ao buscar aluno: {str(e)}")
 
         @self.router_aluno.post("/insert", status_code=201)
-        def criar_aluno(aluno: AlunoCreate):
+        def criar_aluno(aluno: Aluno_Schema):
             try:
                 novo_aluno= self.service.instanceObject(aluno)
                 self.service.insert(novo_aluno)
@@ -44,9 +44,10 @@ class Controller_aluno(Controller_base):
                 raise HTTPException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
 
         @self.router_aluno.put("/update")
-        def atualizar_aluno(data: dict):
+        def atualizar_aluno(aluno: Aluno_Schema):
             try:
-                aluno_atualizado = self.service.update(data)
+                aluno_obj= self.service.instanceObject(aluno)
+                aluno_atualizado = self.service.update(aluno_obj)
                 return self.response.format(aluno_atualizado)
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao atualizar aluno: {str(e)}")

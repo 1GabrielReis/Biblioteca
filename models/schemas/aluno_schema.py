@@ -1,5 +1,8 @@
 from pydantic import BaseModel
+from typing import Optional
 
-class AlunoCreate(BaseModel):
+class Aluno_Schema(BaseModel):
+    id: Optional[int] = None
     nome: str
     sobrenome: str
+        
