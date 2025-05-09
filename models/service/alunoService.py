@@ -46,4 +46,4 @@ class AlunoService(AlunoDao):
             raise ServiceException(f"Erro ao buscar todos os alunos. \nDetalhes: {e}")
         
     def instanceObject(self, aluno: Aluno_Schema) -> Aluno:
-        return Aluno(id= None, nome= aluno.nome, sobrenome= aluno.sobrenome)
+        return Aluno(id= aluno.id, nome= aluno.nome, sobrenome= aluno.sobrenome)

@@ -44,6 +44,7 @@ class AlunoDaoSL3(AlunoDao):
 					        SET nome = ?, sobrenome = ? 
 					        WHERE id_usuario = ?''',(nome,sobrenome,id_aluno))
             self.conn.commit()
+            return aluno
         except sql.Error as erro:
             raise DbException(f"Erro ao atualizar aluno. \nDetalhes: {erro}")
         finally:
