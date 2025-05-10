@@ -15,7 +15,7 @@ class Controller_aluno(Controller_base):
 
     def register_routes(self):
 
-        @self.router_aluno.get("/findAll")
+        @self.router_aluno.get("/findAll", status_code=200)
         def listar_alunos():
             try:
                 alunos = self.service.findAll()
@@ -25,7 +25,7 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao listar alunos: {str(e)}")
 
-        @self.router_aluno.get("/findById/{id}")
+        @self.router_aluno.get("/findById/{id}", status_code=200)
         def buscar_aluno(id: int):
             try:
                 aluno = self.service.findById(id)
@@ -46,7 +46,7 @@ class Controller_aluno(Controller_base):
             except Exception as e:
                 raise HTTPException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
 
-        @self.router_aluno.put("/update")
+        @self.router_aluno.put("/update", status_code=200)
         def atualizar_aluno(aluno: Aluno_Schema):
             try:
                 aluno_obj= self.service.instanceObject(aluno)
