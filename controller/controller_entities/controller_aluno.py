@@ -37,6 +37,8 @@ class Controller_aluno(Controller_base):
 
         @self.router_aluno.post("/insert", status_code=201)
         def criar_aluno(aluno: Aluno_Schema):
+            if aluno.id is not None:
+                    raise HTTPException(status_code=400,detail=f"ID não deve ser enviado ao criar aluno.")
             try:
                 novo_aluno= self.service.instanceObject(aluno)
                 self.service.insert(novo_aluno)
