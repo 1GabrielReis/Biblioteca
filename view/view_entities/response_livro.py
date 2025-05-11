@@ -7,7 +7,7 @@ class Response_livro(Response_base):
             "status": "sucesso",
             "dados": {
                 "id": livro.id,
-                "titulo": livro.titulo,
+                "titulo": livro.titutlo,
                 "autor": livro.autor,
                 "editora": livro.editora
             }

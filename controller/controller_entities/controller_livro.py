@@ -20,8 +20,13 @@ class Controller_livro(Controller_base):
     def register_routes(self):
 
         @self.router_livro.post("/", status_code=201)
-        def insert(livro: Livro_Schema):
-            pass
+        def insert(livro_schema: Livro_Schema):
+            try:
+                novo_livro= self.service.instanceObject(livro_schema)
+                self.service.insert(novo_livro)
+                return self.response.format(novo_livro)
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
 
         @self.router_livro.put("/{id}", status_code=200)
         def update(id: int, livro: Livro_Schema):

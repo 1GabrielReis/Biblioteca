@@ -45,6 +45,6 @@ class LivroService(LivroDao):
         
     def instanceObject(self, livro: Livro_Schema, id= None) -> Livro:
         try:
-            return livro(id= id, titulo= livro.titulo, autor= livro.autor, editora= livro.editora)
+            return Livro(id= id, titulo= livro.titulo, autor= livro.autor, editora= livro.editora)
         except Exception as e:
             raise ServiceException(f"Erro ao instância livro \nDetalhes: {e}")
