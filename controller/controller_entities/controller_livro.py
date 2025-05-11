@@ -18,6 +18,23 @@ class Controller_livro(Controller_base):
         self.register_routes()
 
     def register_routes(self):
+
+        @self.router_livro.post("/", status_code=201)
+        def insert(livro: Livro_Schema):
+            pass
+
+        @self.router_livro.put("/{id}", status_code=200)
+        def update(id: int, livro: Livro_Schema):
+            pass
+
+        @self.router_livro.delete("/{id}", status_code=204)
+        def deleteById(id: int):
+            pass
+
+        @self.router_livro.get("/{id}", status_code=200)
+        def findById(id: int):
+            pass
+
         @self.router_livro.get("/", status_code=200)
-        def listar_alunos():
+        def findAll():
             pass
