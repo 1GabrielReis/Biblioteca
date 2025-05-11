@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 
 from ..controller_base import Controller_base
+from .controllerException import ControllerException
 
 from ...view.view_entities.response_livro import Response_livro
 
@@ -26,7 +27,7 @@ class Controller_livro(Controller_base):
                 self.service.insert(novo_livro)
                 return self.response.format(novo_livro)
             except Exception as e:
-                raise HTTPException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
+                raise ControllerException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
 
         @self.router_livro.put("/{id}", status_code=200)
         def update(id: int, livro: Livro_Schema):
