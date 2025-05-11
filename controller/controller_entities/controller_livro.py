@@ -21,9 +21,9 @@ class Controller_livro(Controller_base):
     def register_routes(self):
 
         @self.router_livro.post("/", status_code=201)
-        def insert(livro_schema: Livro_Schema):
+        def insert(livro: Livro_Schema):
             try:
-                novo_livro= self.service.instanceObject(livro_schema)
+                novo_livro= self.service.instanceObject(livro)
                 self.service.insert(novo_livro)
                 return self.response.format(novo_livro)
             except Exception as e:
@@ -31,7 +31,12 @@ class Controller_livro(Controller_base):
 
         @self.router_livro.put("/{id}", status_code=200)
         def update(id: int, livro: Livro_Schema):
-            pass
+            try:
+                novo_livro= self.service.instanceObject(id= id, livro= livro)
+                self.service.update(novo_livro)
+                return self.response.format(novo_livro)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao atualizar aluno: {str(e)}")
 
         @self.router_livro.delete("/{id}", status_code=204)
         def deleteById(id: int):
