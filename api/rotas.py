@@ -7,14 +7,14 @@ router = APIRouter()
 aluno_ctrl = Controller_aluno()
 router.include_router(
     aluno_ctrl.router_aluno,
-    prefix="/alunos",
-    tags=["Alunos"]
+    prefix="/aluno",
+    tags=["Aluno"]
 )
 
 
 livro_ctrl = Controller_livro()
 router.include_router(
     livro_ctrl.router_livro,
-    prefix="/livros",
-    tags=["Livros"]
+    prefix="/livro",
+    tags=["Livro"]
 )
