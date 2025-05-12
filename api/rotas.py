@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from ..controller.controller_entities.controller_aluno import Controller_aluno
 from ..controller.controller_entities.controller_livro import Controller_livro
+from ..controller.controller_entities.controller_biblioteca import Controller_biblioteca
 
 router = APIRouter()
 
