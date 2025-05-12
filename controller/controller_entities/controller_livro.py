@@ -56,4 +56,8 @@ class Controller_livro(Controller_base):
 
         @self.router_livro.get("/", status_code=200)
         def findAll():
-            pass
+            try:
+                livros= self.service.findAll()
+                return self.response.format_list(livros)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao listar livros: {str(e)}")
