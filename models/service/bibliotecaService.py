@@ -1,10 +1,10 @@
 from typing import List
 
-from model.entities.aluno import Aluno
-from model.entities.biblioteca import Biblioteca
-from model.dao.bibliotecaDao import BibliotecaDao
+from ..model.entities.aluno import Aluno
+from ..model.entities.biblioteca import Biblioteca
+from ..model.dao.bibliotecaDao import BibliotecaDao
 
-from model.dao.daoFactory import DaoFactory
+from ..model.dao.daoFactory import DaoFactory
 
 class  BibliotecaService(BibliotecaDao):
     def __init__(self):
