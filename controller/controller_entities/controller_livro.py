@@ -27,7 +27,7 @@ class Controller_livro(Controller_base):
                 self.service.insert(novo_livro)
                 return self.response.format(novo_livro)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao criar aluno: {str(e)}")
+                raise ControllerException(status_code=500, detail=f"Erro ao criar livro: {str(e)}")
 
         @self.router_livro.put("/{id}", status_code=200)
         def update(id: int, livro: Livro_Schema):
@@ -36,11 +36,15 @@ class Controller_livro(Controller_base):
                 self.service.update(novo_livro)
                 return self.response.format(novo_livro)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao atualizar aluno: {str(e)}")
+                raise ControllerException(status_code=500, detail=f"Erro ao atualizar livro: {str(e)}")
 
         @self.router_livro.delete("/{id}", status_code=204)
         def deleteById(id: int):
-            pass
+            try:
+                self.service.deleteById(id)
+                return Response(status_code=204)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao deletar livro: {str(e)}")
 
         @self.router_livro.get("/{id}", status_code=200)
         def findById(id: int):
