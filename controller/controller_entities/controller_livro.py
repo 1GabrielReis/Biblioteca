@@ -48,7 +48,11 @@ class Controller_livro(Controller_base):
 
         @self.router_livro.get("/{id}", status_code=200)
         def findById(id: int):
-            pass
+            try:
+                livro= self.service.findById(id)
+                return self.response.format(livro)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao buscar livro: {str(e)}")
 
         @self.router_livro.get("/", status_code=200)
         def findAll():
