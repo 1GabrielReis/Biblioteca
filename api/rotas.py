@@ -18,3 +18,10 @@ router.include_router(
     prefix="/livro",
     tags=["Livro"]
 )
+
+biblioteca_ctrl = Controller_biblioteca()
+router.include_router(
+    biblioteca_ctrl.router_biblioteca,
+    prefix="/biblioteca",
+    tags=["Biblioteca"]
+)
