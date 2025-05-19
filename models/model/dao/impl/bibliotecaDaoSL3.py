@@ -115,7 +115,7 @@ class BibliotecaDaoSL3(BibliotecaDao):
             DB.closeCursor(cursor)
 
 
-    def findByAluno(self,aluno: Aluno):
+    def findByAluno(self,id: int):
         cursor=None
         try:
             cursor= self.conn.cursor()
@@ -128,7 +128,7 @@ class BibliotecaDaoSL3(BibliotecaDao):
                             ON avaliar_biblioteca.id_aluno = alunos.id_usuario  
                             WHERE alunos.id_usuario = ? 
                             ORDER BY nome
-                            ''',(aluno.id,))
+                            ''',(id,))
             resultSetList= cursor.fetchall()
             listaBiblioteca= list()
             dicioanrioAluno= {}
