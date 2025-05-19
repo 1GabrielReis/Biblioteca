@@ -2,10 +2,10 @@
 from typing import List
 from abc import ABC, abstractmethod
 
-from model.entities.aluno import Aluno
-from model.entities.biblioteca import Biblioteca
+from ..model.entities.aluno import Aluno
+from ..model.entities.biblioteca import Biblioteca
 
-from service.bibliotecaService import BibliotecaService
+from ..service.bibliotecaService import BibliotecaService
 
 
 ativo= True
@@ -61,8 +61,7 @@ def findAll():
 def findByAluno():
     print('find By Aluno')
     id_aluno=int(input('Qual o ID do aluno para encontra sua avaliação da biblioteca: '))
-    aluno= Aluno(id_aluno,None,None)
-    biblioteca = bibliotecaDao.findByAluno(aluno)
+    biblioteca = bibliotecaDao.findByAluno(id_aluno)
     print(biblioteca)
 
 
