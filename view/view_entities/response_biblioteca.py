@@ -1,5 +1,4 @@
 from ..response_base import Response_base
-import json
 
 class Response_biblioteca(Response_base):
     
