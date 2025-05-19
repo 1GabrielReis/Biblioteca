@@ -48,9 +48,10 @@ class Controller_biblioteca(Controller_base):
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliação da biblioteca: {str(e)}")
 
         @self.router_biblioteca.get("/", status_code=200)
-        def findAll(self):
+        def findAll():
             try:
-                pass
+                avaliacoes_biblioteca= self.service.findAll()
+                return self.response.format_list(avaliacoes_biblioteca)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao listar avaliações da biblioteca: {str(e)}")
 

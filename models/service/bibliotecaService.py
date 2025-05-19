@@ -59,7 +59,7 @@ class  BibliotecaService(BibliotecaDao):
         
     def instance_biblioteca(self, biblioteca: Biblioteca_schema, id= None) -> Biblioteca:
         try:
-            return Biblioteca(id= id, nota= biblioteca.nota, aluno= self.instance_aluno(biblioteca.aluno))
+            return Biblioteca(id= id, nota= biblioteca.nota, aluno=Aluno(biblioteca.aluno_id, None, None))
         except Exception as e:
             raise ServiceException(f"Erro ao instanciar biblioteca \nDetalhes: {e}")
     
