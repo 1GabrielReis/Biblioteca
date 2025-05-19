@@ -56,5 +56,11 @@ class Controller_biblioteca(Controller_base):
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao listar avaliações da biblioteca: {str(e)}")
 
-        #def findByAluno(self, aluno):
-        #    pass
+        @self.router_biblioteca.get("/aluno/{id}", status_code=200)
+        def findByAluno(id: int):
+            try:
+                avaliacoes_aluno= self.service.findByAluno(id=id)
+                return self.response.format_by_aluno(avaliacoes_aluno)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliações da biblioteca do aluno: {str(e)}")
+           
