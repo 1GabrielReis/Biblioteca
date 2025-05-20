@@ -1,17 +1,25 @@
+from datetime import datetime
+
 from ..response_base import Response_base
 
 class Resonse_reserva(Response_base):
+
+    def _formatDate(self, data: datetime):
+        if data is not None:
+            return data.date().isoformat()
+        return None
+
     def format(self, reserva):
         return {
             "status": "sucesso",
             "dados": {
                 "id": reserva.id,
-                "data_inicio": reserva.data_inicio,
-                "data_final": reserva.data_final,
-                "data_entregue": reserva.data_entregue,
+                "data_inicio": self._formatDate(reserva.data_inicio),
+                "data_final": self._formatDate(reserva.data_final),
+                "data_entregue": self._formatDate(reserva.data_entregue),
                 "livro": {
                     "id":reserva.livro.id,
-                    "titulo":reserva.livro.titulo,
+                    "titulo":reserva.livro.titutlo,
                     "autor": reserva.livro.autor,
                     "editora": reserva.livro.editora
                 },
