@@ -50,7 +50,8 @@ class Controller_reserva(Controller_base):
         @self.router_reserva.get("/", status_code=200)
         def findAll():
             try:
-                pass
+                reservas= self.service.findAll()
+                return self.response.format_list(reservas)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao listar reserva: {str(e)}")
 
