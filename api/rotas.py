@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from ..controller.controller_entities.controller_aluno import Controller_aluno
 from ..controller.controller_entities.controller_livro import Controller_livro
 from ..controller.controller_entities.controller_biblioteca import Controller_biblioteca
+from ..controller.controller_entities.controller_reserva import Controller_reserva
 
 router = APIRouter()
 
@@ -25,4 +26,11 @@ router.include_router(
     biblioteca_ctrl.router_biblioteca,
     prefix="/biblioteca",
     tags=["Biblioteca"]
+)
+
+reserva_ctrl = Controller_reserva()
+router.include_router(
+    reserva_ctrl.router_reserva,
+    prefix="/reserva",
+    tags=["Reserva"]
 )
