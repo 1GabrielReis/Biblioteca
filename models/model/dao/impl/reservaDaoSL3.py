@@ -137,10 +137,10 @@ class ReservaDaoSL3(ReservaDao):
             DB.closeCursor(cursor)
     
  
-    def findByLivro(self, livro: Livro):
+    def findByLivro(self, id: int):
         cursor= None
         try:
-            id_livro= livro.id
+            id_livro= id
             cursor= self.conn.cursor()
             resultSetList=  cursor.execute( '''
                                 SELECT
@@ -169,10 +169,10 @@ class ReservaDaoSL3(ReservaDao):
             DB.closeCursor(cursor)            
 
     
-    def findByAluno(self, aluno: Aluno):
+    def findByAluno(self, id: int):
         cursor= None
         try:
-            id_aluno= aluno.id
+            id_aluno= id
             cursor= self.conn.cursor()
             cursor.execute('''
                             SELECT
