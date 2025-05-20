@@ -68,9 +68,9 @@ class ReservaService(ReservaDao):
         
     def instance_reserva(self, reserva: Reserva_Schema ,id: int = None):
         try:
-            data_inicio = datetime.strptime(reserva.data_inicio,"%d/%m/%Y") if reserva.data_inicio is not None else None
-            data_final = datetime.strptime(reserva.data_final,"%d/%m/%Y") if reserva.data_final is not None else None
-            data_entregue= datetime.strptime(reserva.data_entregue,"%d/%m/%Y") if reserva.data_entregue is not None else None
+            data_inicio = datetime.strptime(reserva.data_inicio,"%Y-%m-%d") if reserva.data_inicio is not None else None
+            data_final = datetime.strptime(reserva.data_final,"%Y-%m-%d") if reserva.data_final is not None else None
+            data_entregue= datetime.strptime(reserva.data_entregue,"%Y-%m-%d") if reserva.data_entregue is not None else None
             aluno =  AlunoService()
             livro = LivroService()
             return Reserva(id=id,
