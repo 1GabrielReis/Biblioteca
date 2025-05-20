@@ -31,7 +31,9 @@ class Controller_biblioteca(Controller_base):
         @self.router_biblioteca.put("/{id}", status_code=200)
         def update(id: int, biblioteca : Biblioteca_schema):
             try:
-                pass
+                livro_update= self.service.instance_biblioteca(id=id,biblioteca= biblioteca)
+                self.service.update(livro_update)
+                return self.response.format(livro_update)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao atualizar avaliação da biblioteca: {str(e)}")
 
