@@ -1,0 +1,73 @@
+from fastapi import APIRouter, HTTPException
+from fastapi.responses import Response
+
+from ..controller_base import Controller_base
+from .controllerException import ControllerException
+
+from ...models.service.reservaService import ReservaService
+from ...models.schemas.reserva_schema import Reserva_Schema
+
+from ...view.view_entities.response_reserva import Response_Reserva
+
+class Controller_reserva(Controller_base):
+    def __init__(self):
+        super().__init__()
+        self.service= ReservaService()
+        self.response = Response_Reserva()
+        self.router_reserva = APIRouter()
+        self.register_routes()
+
+    def register_routes(self):
+        
+        @self.router_reserva.post("/", status_code=201)
+        def insert(reserva: Reserva_Schema):
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao adicionar Reserva: {str(e)}")
+
+        @self.router_reserva.put("/{id}", status_code=200)
+        def update(reserva: Reserva_Schema):
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao atualizar reserva: {str(e)}")
+
+        @self.router_reserva.delete("/{id}", status_code=204)
+        def deleteById(id: int):
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao deletar reserva: {str(e)}")
+
+        @self.router_reserva.get("/{id}", status_code=200)
+        def findById(id: int):
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao buscar reserva: {str(e)}")
+
+        @self.router_reserva.get("/", status_code=200)
+        def findAll():
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao listar reserva: {str(e)}")
+
+        @self.router_reserva.get("/livro/{id}", status_code=200)
+        def findByLivro(id: int):
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao buscar reserva do aluno: {str(e)}")
+
+        @self.router_reserva.get("/aluno/{id}", status_code=200)
+        def findByAluno(id: int):
+            try:
+                pass
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao buscar reserva do livro: {str(e)}")
+
+        #@self.router_reserva.get("/aluno/{id}", status_code=200)
+        #def returnBook(id: int):
+        #    pass
