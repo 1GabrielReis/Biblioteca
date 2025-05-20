@@ -1,6 +1,6 @@
 from ..response_base import Response_base
 
-class resonse_reserva(Response_base):
+class Resonse_reserva(Response_base):
     def format(self, reserva):
         return {
             "status": "sucesso",

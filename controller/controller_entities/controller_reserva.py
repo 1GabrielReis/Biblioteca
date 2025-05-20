@@ -5,15 +5,15 @@ from ..controller_base import Controller_base
 from .controllerException import ControllerException
 
 from ...models.service.reservaService import ReservaService
-from ...models.schemas.reserva_schema import Reserva_Schema
+from ...models.schemas.reserva_Schema import Reserva_Schema
 
-from ...view.view_entities.response_reserva import Response_Reserva
+from ...view.view_entities.response_reserva import Resonse_reserva
 
 class Controller_reserva(Controller_base):
     def __init__(self):
         super().__init__()
         self.service= ReservaService()
-        self.response = Response_Reserva()
+        self.response = Resonse_reserva()
         self.router_reserva = APIRouter()
         self.register_routes()
 
