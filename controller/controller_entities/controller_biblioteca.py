@@ -22,7 +22,9 @@ class Controller_biblioteca(Controller_base):
         @self.router_biblioteca.post("/", status_code=201)
         def insert(biblioteca : Biblioteca_schema):
             try:
-                pass
+                nova_avaliacao= self.service.instance_biblioteca(biblioteca)
+                self.service.insert(nova_avaliacao)
+                return self.response.format(nova_avaliacao)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao avaliar a biblioteca: {str(e)}")
 
