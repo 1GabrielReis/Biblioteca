@@ -40,7 +40,8 @@ class Controller_biblioteca(Controller_base):
         @self.router_biblioteca.delete("/{id}", status_code=204)
         def deleteById(id: int):
             try:
-                pass
+                self.service.deleteById(id=id)
+                return Response(status_code=204)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao deletar avaliação da biblioteca: {str(e)}")
 
