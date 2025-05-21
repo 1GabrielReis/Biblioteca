@@ -22,7 +22,9 @@ class Controller_reserva(Controller_base):
         @self.router_reserva.post("/", status_code=201)
         def insert(reserva: Reserva_Schema):
             try:
-                pass
+                nova_reserva= self.service.instance_reserva(reserva)
+                self.service.insert(nova_reserva)
+                return self.response.format(nova_reserva)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao adicionar Reserva: {str(e)}")
 
