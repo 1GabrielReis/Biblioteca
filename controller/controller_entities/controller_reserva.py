@@ -29,9 +29,11 @@ class Controller_reserva(Controller_base):
                 raise ControllerException(status_code=500, detail=f"Erro ao adicionar Reserva: {str(e)}")
 
         @self.router_reserva.put("/{id}", status_code=200)
-        def update(reserva: Reserva_Schema):
+        def update(reserva: Reserva_Schema, id):
             try:
-                pass
+                update_reserva= self.service.instance_reserva(id=id, reserva=reserva)
+                self.service.update(update_reserva)
+                return self.response.format(update_reserva)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao atualizar reserva: {str(e)}")
 
