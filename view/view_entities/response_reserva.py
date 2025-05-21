@@ -10,6 +10,13 @@ class Resonse_reserva(Response_base):
         return None
 
     def format(self, reserva):
+        if not reserva:
+            return {
+                "status": "sucesso",
+                "quantidade": 0,
+                "livro": None,
+                "dados": []
+            }
         return {
             "status": "sucesso",
             "dados": {
@@ -74,3 +81,41 @@ class Resonse_reserva(Response_base):
                 } for reserva in reservas
             ]
         }
+    
+
+    def format_list_by_Aluno(self, reservas):
+        if not reservas:
+            return {
+                "status": "sucesso",
+                "quantidade": 0,
+                "livro": None,
+                "dados": []
+            }
+
+        aluno = reservas[0].aluno  
+
+        return {
+            "status": "sucesso",
+            "aluno": {
+
+                "id": aluno.id,
+                "nome": aluno.nome,
+                "sobrenome": aluno.sobrenome
+            },
+            "quantidade": len(reservas),
+            "dados": [
+                {
+                    "id": reserva.id,
+                    "data_inicio": self._formatDate(reserva.data_inicio),
+                    "data_final": self._formatDate(reserva.data_final),
+                    "data_entregue": self._formatDate(reserva.data_entregue),
+                    "livro": {
+                        "id": reserva.livro.id,
+                        "titulo": reserva.livro.titutlo,
+                        "autor": reserva.livro.autor,
+                        "editora": reserva.livro.editora
+                    },
+                } for reserva in reservas
+            ]
+        }
+    
