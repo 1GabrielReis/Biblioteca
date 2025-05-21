@@ -43,7 +43,8 @@ class Controller_reserva(Controller_base):
         @self.router_reserva.get("/{id}", status_code=200)
         def findById(id: int):
             try:
-                pass
+                reserva= self.service.findById(id=id)
+                return self.response.format(reserva)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar reserva: {str(e)}")
 
