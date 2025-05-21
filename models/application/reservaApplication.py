@@ -2,11 +2,11 @@ from typing import List
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-from model.entities.livro import Livro
-from model.entities.aluno import Aluno
-from model.entities.reserva import Reserva
+from ..model.entities.livro import Livro
+from ..model.entities.aluno import Aluno
+from ..model.entities.reserva import Reserva
 
-from service.reservaService import ReservaService
+from ..service.reservaService import ReservaService
 
 class ClassAbstrata(ABC):
     @abstractmethod
@@ -112,16 +112,14 @@ def findAll(): #5
 def findByLivro(): #6
     print('devolverLivro')
     id_livro= int(input('Qual o id do livro para encontra sua reservas: '))
-    livro= Livro(id_livro, None, None, None)
-    reservas= reservaDao.findByLivro(livro)
+    reservas= reservaDao.findByLivro(id_livro)
     print(reservas)
 
 
 def findByAluno(): #7
     print("findByAluno")
     id_aluno=int(input('Qual o id do aluno para encontra sua reservas: '))
-    aluno= Aluno(id_aluno,None, None)
-    reservas= reservaDao.findByAluno(aluno)
+    reservas= reservaDao.findByAluno(id_aluno)
     print(reservas)
 
 def returnBook(): #8
