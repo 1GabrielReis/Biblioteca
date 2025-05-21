@@ -78,6 +78,6 @@ class ReservaService(ReservaDao):
                             data_final= data_final,
                             data_entregue= data_entregue,
                             aluno= aluno.findById(reserva.aluno),
-                            livro= livro.findAll(reserva.livro))
+                            livro= livro.findById(reserva.livro))
         except Exception as e:
             raise ServiceException(f"Erro ao instanciar Reserva \nDetalhes: {e}")
