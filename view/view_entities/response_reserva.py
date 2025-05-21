@@ -38,3 +38,39 @@ class Resonse_reserva(Response_base):
             "quantidade": len(reservas),
             "dados": [self.format(reserva)["dados"] for reserva in reservas] if reservas else []
         }
+    
+
+    def format_list_by_livro(self, reservas):
+        if not reservas:
+            return {
+                "status": "sucesso",
+                "quantidade": 0,
+                "livro": None,
+                "dados": []
+            }
+
+        livro = reservas[0].livro  
+
+        return {
+            "status": "sucesso",
+            "livro": {
+                "id": livro.id,
+                "titulo": livro.titutlo,
+                "autor": livro.autor,
+                "editora": livro.editora
+            },
+            "quantidade": len(reservas),
+            "dados": [
+                {
+                    "id": reserva.id,
+                    "data_inicio": self._formatDate(reserva.data_inicio),
+                    "data_final": self._formatDate(reserva.data_final),
+                    "data_entregue": self._formatDate(reserva.data_entregue),
+                    "aluno": {
+                        "id": reserva.aluno.id,
+                        "nome": reserva.aluno.nome,
+                        "sobrenome": reserva.aluno.sobrenome
+                    }
+                } for reserva in reservas
+            ]
+        }
