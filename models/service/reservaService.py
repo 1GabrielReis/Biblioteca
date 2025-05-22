@@ -62,6 +62,7 @@ class ReservaService(ReservaDao):
 
     def returnBook(self, reserva: Reserva):
         try:
+            reserva.data_entregue= datetime.now().replace(hour= 0, minute= 0, second= 0, microsecond= 0)
             return self.reservaDao.returnBook(reserva)
         except Exception as e:
             raise ServiceException(f"... \nDetalhes: {e}")
