@@ -77,6 +77,12 @@ class Controller_reserva(Controller_base):
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar reserva do livro: {str(e)}")
 
-        #@self.router_reserva.get("/aluno/{id}", status_code=200)
-        #def returnBook(id: int):
-        #    pass
+        @self.router_reserva.put("/{id}/devolver", status_code=200)
+        def returnBook(id: int):
+            print(">>> CHAMOU A ROTA")
+            try:
+                reserva= self.service.findById(id=id)
+                self.service.returnBook(reserva=reserva)
+                return self.response.format(reserva)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao devolver livro: {str(e)}")
