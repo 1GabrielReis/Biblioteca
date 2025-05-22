@@ -125,10 +125,8 @@ def findByAluno(): #7
 def returnBook(): #8
     print('return book')
     id_reserva= int(input('Qual o id da reserva: '))
-    reserva= reservaDao.findById(id_reserva)
-    reserva.data_entregue= datetime.today().replace(hour= 0, minute= 0, second= 0, microsecond= 0)
+    reserva= reservaDao.findById(id=id_reserva)
     reservaDao.returnBook(reserva)
-    reserva= reservaDao.findById(id_reserva)
     print(reserva)
 
 
