@@ -3,6 +3,7 @@ from ..controller.controller_entities.controller_aluno import Controller_aluno
 from ..controller.controller_entities.controller_livro import Controller_livro
 from ..controller.controller_entities.controller_biblioteca import Controller_biblioteca
 from ..controller.controller_entities.controller_reserva import Controller_reserva
+from ..controller.controller_entities.controller_avaliacao import Controller_avaliacao
 
 router = APIRouter()
 
@@ -33,4 +34,11 @@ router.include_router(
     reserva_ctrl.router_reserva,
     prefix="/reserva",
     tags=["Reserva"]
+)
+
+avaliacao_ctrl = Controller_avaliacao()
+router.include_router(
+    avaliacao_ctrl.router_avaliacao,
+    prefix="/avaliacao",
+    tags=["Avaliacao"]
 )
