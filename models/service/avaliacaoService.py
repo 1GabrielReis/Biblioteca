@@ -11,6 +11,8 @@ from ..schemas.avaliacao_schema import Avaliacao_Schema
 
 from .serviceException import ServiceException
 from .reservaService import ReservaService
+from .alunoService import AlunoService
+from .livroService import LivroService
 
 
 
