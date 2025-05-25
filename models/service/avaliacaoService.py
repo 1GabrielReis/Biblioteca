@@ -23,6 +23,13 @@ class AvaliacaoService(AvaliacaoDao):
     
     def insert(self,avaliacao: Avaliacao):
         try:
+            avaliacoes = self.findAll()
+            for avaliacao1 in avaliacoes:
+                if avaliacao.reserva.id == avaliacao1.reserva.id:
+                    raise ServiceException(
+                        f"O livro {avaliacao.livro} já foi avaliado referente ao registro de reserva {avaliacao.reserva.id}"
+                    )
+
             return self.avaliacaoDao.insert(avaliacao)
         except Exception as e:
             raise ServiceException(f"Erro ao inserir avaliação do livro.\nDetalhes: {e}")
@@ -69,7 +76,7 @@ class AvaliacaoService(AvaliacaoDao):
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todos avaliaçoes de livros reservado \nDetalhes: {e}")
         
-    def instance_reserva(self, avaliacao: Avaliacao_Schema ,id: int = None):
+    def instance_avaliacao(self, avaliacao: Avaliacao_Schema ,id: int = None):
         try:
             reservaDao=  ReservaService()
             reserva: Reserva= reservaDao.findById(avaliacao.reserva)
