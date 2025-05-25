@@ -43,7 +43,8 @@ class Controller_avaliacao(Controller_base):
         @self.router_avaliacao.get("/{id}", status_code=200)
         def findById(id: int):
             try:
-                pass
+                avaliacao= self.service.findById(id=id)
+                return self.response.format(avaliacao)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliação do livro: {str(e)}")
 
