@@ -20,14 +20,16 @@ class Controller_avaliacao(Controller_base):
     def register_routes(self):
 
         @self.router_avaliacao.post("/", status_code=201)
-        def insert(reserva: Avaliacao_Schema):
+        def insert(avaliacao: Avaliacao_Schema):
             try:
-                pass
+                avaliacao_now=  self.service.instance_avaliacao(avaliacao=avaliacao)
+                self.service.insert(avaliacao_now)
+                return self.response.format(avaliacao_now)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao avaliar livro: {str(e)}")
 
         @self.router_avaliacao.put("/", status_code=200)
-        def update(reserva: Avaliacao_Schema):
+        def update(avaliacao: Avaliacao_Schema):
             try:
                 pass
             except Exception as e:
