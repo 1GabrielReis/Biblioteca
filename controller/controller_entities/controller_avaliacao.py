@@ -28,12 +28,17 @@ class Controller_avaliacao(Controller_base):
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao avaliar livro: {str(e)}")
 
-        @self.router_avaliacao.put("/", status_code=200)
-        def update(avaliacao: Avaliacao_Schema):
+        @self.router_avaliacao.put("/{id}", status_code=200)
+        def update(id: int, avaliacao: Avaliacao_Schema):
             try:
-                pass
+                avaliacao_obj = self.service.instance_avaliacao(avaliacao=avaliacao, id=id)
+                self.service.update(avaliacao_obj)
+                return self.response.format(avaliacao_obj)
+            except ValueError as e:
+                raise HTTPException(status_code=422, detail=str(e))
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao atualizar avaliação do livro: {str(e)}")
+                raise ControllerException(message=f"Erro ao atualizar avaliação do livro: {str(e)}", status_code=500)
+
 
         @self.router_avaliacao.delete("/{id}", status_code=204)
         def deleteById(id: int):
