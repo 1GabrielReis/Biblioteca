@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 
-from ...models.service.avaliacaoService import Avaliacao
+from ...models.service.avaliacaoService import AvaliacaoService
 from ...models.schemas.avaliacao_schema import Avaliacao_Schema
 
 from ...view.view_entities.response_avaliacao import Response_avaliacao
@@ -12,7 +12,7 @@ from .controllerException import ControllerException
 class Controller_avaliacao(Controller_base):
     def __init__(self):
         super().__init__()
-        self.service= Avaliacao()
+        self.service= AvaliacaoService()
         self.response= Response_avaliacao()
         self.router_avaliacao= APIRouter()
         self.register_routes()
@@ -50,7 +50,8 @@ class Controller_avaliacao(Controller_base):
         @self.router_avaliacao.get("/", status_code=200)
         def findAll():
             try:
-                pass
+                avaliacoes= self.service.findAll()
+                return self.response.format_list(avaliacoes)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao listar avaliações de livros: {str(e)}")
 
