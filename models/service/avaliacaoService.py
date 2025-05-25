@@ -42,7 +42,7 @@ class AvaliacaoService(AvaliacaoDao):
 
     def deleteById(self,id: int):
         try:
-            return self.avaliacaoDao.deleteById(int)
+            return self.avaliacaoDao.deleteById(id)
         except Exception as e:
             raise ServiceException(f"Erro ao deletar avaliação do livro {id}.\nDetalhes: {e}")
 
