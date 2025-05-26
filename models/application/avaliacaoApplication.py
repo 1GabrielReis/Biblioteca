@@ -1,11 +1,11 @@
 from typing import List
 
-from model.entities.avaliacao import Avaliacao
-from model.entities.aluno import Aluno
-from model.entities.livro import Livro
-from model.entities.reserva import Reserva
+from ..model.entities.avaliacao import Avaliacao
+from ..model.entities.aluno import Aluno
+from ..model.entities.livro import Livro
+from ..model.entities.reserva import Reserva
 
-from service.avaliacaoService import AvaliacaoService
+from ..service.avaliacaoService import AvaliacaoService
 
 ativo= True
 avaliacaoDao= AvaliacaoService()
@@ -69,8 +69,7 @@ def findAll():
 def findByAluno():
     print('find By Aluno')
     id_aluno= int(input('Qual o id do aluno: '))
-    aluno= Aluno(id_aluno, None, None)
-    avaliacoes= avaliacaoDao.findByAluno(aluno)
+    avaliacoes= avaliacaoDao.findByAluno(id_aluno)
     print(avaliacoes)
 
 def findByLivro():
