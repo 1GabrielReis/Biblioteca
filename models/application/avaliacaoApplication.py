@@ -81,8 +81,7 @@ def findByLivro():
 def findByReserva():
     print("find By Reserva")
     id_reserva= int(input("Qual o id da Reserva: "))
-    reserva= Reserva(id_reserva, None, None, None, None, None)
-    avaliacoes= avaliacaoDao.findByReserva(reserva)
+    avaliacoes= avaliacaoDao.findByReserva(id_reserva)
     print(avaliacoes)
 
 def escolha():
