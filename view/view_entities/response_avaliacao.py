@@ -104,4 +104,31 @@ class Response_avaliacao(Response_base):
 
 
     def format_list_by_Reserva(self, avaliacoes):
-        pass
+        if not avaliacoes:
+            return {
+                "status": "sucesso",
+                "quantidade": 0,
+                "livro": None,
+                "dados": []
+            }
+        
+        reserva = avaliacoes[0].reserva
+
+        return{
+            "status": "sucesso",
+            "reserva": {
+                "data_inicio": reserva.data_inicio,
+                "data_final": reserva.data_final,
+                "data_entregue": reserva.data_entregue
+            },
+            "quantidade": len(avaliacoes),
+            "dados": [
+                {
+                    "id": avaliacao.id,
+                    "nota": avaliacao.nota,
+                    "aluno": self.response_aluno.format(avaliacao.aluno)['dados'],
+                    "livro":self.response_livro.format(avaliacao.livro)['dados']
+                } for avaliacao in avaliacoes
+            ]
+
+        }
