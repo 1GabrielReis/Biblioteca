@@ -75,8 +75,7 @@ def findByAluno():
 def findByLivro():
     print('find By Livro')
     id_livro= int(input('Qual o id do livro: '))
-    livro= Livro(id_livro, None, None, None)
-    avaliacoes= avaliacaoDao.findByLivro(livro)
+    avaliacoes= avaliacaoDao.findByLivro(id_livro)
     print(avaliacoes)
 
 def findByReserva():
