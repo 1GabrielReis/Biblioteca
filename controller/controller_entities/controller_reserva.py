@@ -7,13 +7,13 @@ from .controllerException import ControllerException
 from ...models.service.reservaService import ReservaService
 from ...models.schemas.reserva_Schema import Reserva_Schema
 
-from ...view.view_entities.response_reserva import Resonse_reserva
+from ...view.view_entities.response_reserva import Response_reserva
 
 class Controller_reserva(Controller_base):
     def __init__(self):
         super().__init__()
         self.service= ReservaService()
-        self.response = Resonse_reserva()
+        self.response = Response_reserva()
         self.router_reserva = APIRouter()
         self.register_routes()
 
