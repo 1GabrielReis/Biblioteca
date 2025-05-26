@@ -63,14 +63,7 @@ class Controller_avaliacao(Controller_base):
                 return self.response.format_list(avaliacoes)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao listar avaliações de livros: {str(e)}")
-
-        @self.router_avaliacao.get("/{id}", status_code=200)
-        def findByLivro(id: int):
-            try:
-                pass
-            except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliações de livros do aluno: {str(e)}")
-
+            
         @self.router_avaliacao.get("/aluno/{id}", status_code=200)
         def findByAluno(id: int):
             try:
@@ -78,6 +71,14 @@ class Controller_avaliacao(Controller_base):
                 return self.response.format_list_by_Aluno(avaliacoes)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliações do livros: {str(e)}")
+
+        @self.router_avaliacao.get("/livro/{id}", status_code=200)
+        def findByLivro(id: int):
+            try:
+                avaliacoes = self.service.findByLivro(id= id)
+                return self.response.format_list_by_livro(avaliacoes= avaliacoes)
+            except Exception as e:
+                raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliações de livros do aluno: {str(e)}")
 
         @self.router_avaliacao.get("/{id}", status_code=200)
         def findByReserva(id: int):
