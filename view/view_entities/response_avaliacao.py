@@ -63,12 +63,7 @@ class Response_avaliacao(Response_base):
 
         return{
             "status": "sucesso",
-            "aluno": {
-
-                "id": aluno.id,
-                "nome": aluno.nome,
-                "sobrenome": aluno.sobrenome
-            },
+            "aluno": self.response_aluno.format(aluno= aluno)['dados'],
             "quantidade": len(avaliacoes),
             "dados": [
                 {
@@ -82,7 +77,30 @@ class Response_avaliacao(Response_base):
         }
 
     def format_list_by_livro(self, avaliacoes):
-        pass
+        if not avaliacoes:
+            return {
+                "status": "sucesso",
+                "quantidade": 0,
+                "livro": None,
+                "dados": []
+            }
+        
+        livro = avaliacoes[0].livro
+
+        return{
+            "status": "sucesso",
+            "livro": self.response_livro.format(livro= livro)['dados'],
+            "quantidade": len(avaliacoes),
+            "dados": [
+                {
+                    "id": avaliacao.id,
+                    "nota": avaliacao.nota,
+                    "aluno": self.response_aluno.format(avaliacao.aluno)['dados'],
+                    "reserva": self._format_reserva(self.response_reserva.format(avaliacao.reserva)['dados'])
+                } for avaliacao in avaliacoes
+            ]
+
+        }
 
 
     def format_list_by_Reserva(self, avaliacoes):
