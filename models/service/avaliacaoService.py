@@ -58,21 +58,21 @@ class AvaliacaoService(AvaliacaoDao):
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todas avaliações dos livros. \nDetalhes: {e}")
 
-    def findByAluno(self, avaliacao) -> List[Avaliacao]:
+    def findByAluno(self, id: int):
         try:
-            return self.avaliacaoDao.findByAluno(avaliacao)
+            return self.avaliacaoDao.findByAluno(id)
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todos as avalições de livros do aluno\nDetalhes: {e}")
 
-    def findByLivro(self, avaliacao) -> List[Avaliacao]:
+    def findByLivro(self, id: int) -> List[Avaliacao]:
         try:
-            return self.avaliacaoDao.findByLivro(avaliacao)
+            return self.avaliacaoDao.findByLivro(id)
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todos avaliaçoes do livro\nDetalhes: {e}")
 
-    def findByReserva(self, avaliacao) -> List[Avaliacao]:
+    def findByReserva(self, id: int) -> List[Avaliacao]:
         try:
-            return self.avaliacaoDao.findByReserva(avaliacao)
+            return self.avaliacaoDao.findByReserva(id)
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todos avaliaçoes de livros reservado \nDetalhes: {e}")
                 
