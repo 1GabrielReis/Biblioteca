@@ -2,7 +2,7 @@ from datetime import datetime
 
 from ..response_base import Response_base
 
-class Resonse_reserva(Response_base):
+class Response_reserva(Response_base):
 
     def _formatDate(self, data: datetime):
         if data is not None:
@@ -88,7 +88,7 @@ class Resonse_reserva(Response_base):
             return {
                 "status": "sucesso",
                 "quantidade": 0,
-                "livro": None,
+                "aluno": None,
                 "dados": []
             }
 
