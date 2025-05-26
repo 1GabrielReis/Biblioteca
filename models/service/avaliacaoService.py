@@ -66,7 +66,7 @@ class AvaliacaoService(AvaliacaoDao):
 
     def findByLivro(self, id: int) -> List[Avaliacao]:
         try:
-            return self.avaliacaoDao.findByLivro(id)
+            return self.avaliacaoDao.findByLivro(id= id)
         except Exception as e:
             raise ServiceException(f"Erro ao buscar todos avaliaçoes do livro\nDetalhes: {e}")
 
