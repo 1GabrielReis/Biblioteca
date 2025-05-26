@@ -71,10 +71,11 @@ class Controller_avaliacao(Controller_base):
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliações de livros do aluno: {str(e)}")
 
-        @self.router_avaliacao.get("/{id}", status_code=200)
+        @self.router_avaliacao.get("/aluno/{id}", status_code=200)
         def findByAluno(id: int):
             try:
-                pass
+                avaliacoes= self.service.findByAluno(id=id)
+                return self.response.format_list_by_Aluno(avaliacoes)
             except Exception as e:
                 raise ControllerException(status_code=500, detail=f"Erro ao buscar avaliações do livros: {str(e)}")
 
