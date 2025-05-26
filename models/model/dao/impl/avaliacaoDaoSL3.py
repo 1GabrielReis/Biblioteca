@@ -122,10 +122,10 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         finally:
             DB.closeCursor(cursor)
 
-    def findByAluno(self, aluno: Aluno) -> List[Avaliacao]:
+    def findByAluno(self, id: int) -> List[Avaliacao]:
         cursor= None
         try:
-            id_aluno= aluno.id
+            id_aluno= id
             cursor= self.conn.cursor()
             resultSetList='''
                             SELECT 
@@ -157,10 +157,10 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         finally:
             DB.closeCursor(cursor)
 
-    def findByLivro(self, livro: Livro) -> List[Avaliacao]:
+    def findByLivro(self, id: int) -> List[Avaliacao]:
         cursor= None
         try:
-            id_livro= livro.id
+            id_livro= id
             cursor= self.conn.cursor()
             resultSetList='''
                             SELECT 
@@ -192,10 +192,10 @@ class AvaliacaoDaoSL3(AvaliacaoDao):
         finally:
             DB.closeCursor(cursor)
 
-    def findByReserva(self, reserva: Reserva) -> List[Avaliacao]:
+    def findByReserva(self, id: int) -> List[Avaliacao]:
         cursor= None
         try:
-            id_reserva= reserva.id
+            id_reserva= id
             cursor= self.conn.cursor()
             resultSetList='''
                             SELECT 
