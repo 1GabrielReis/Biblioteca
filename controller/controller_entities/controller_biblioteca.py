@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 
-from ...models.service.bibliotecaService import BibliotecaService
-from ...models.schemas.biblioteca_schema import Biblioteca_schema
+from models.service.bibliotecaService import BibliotecaService
+from models.schemas.biblioteca_schema import Biblioteca_schema
 
-from ...view.view_entities.response_biblioteca import Response_biblioteca
+from view.view_entities.response_biblioteca import Response_biblioteca
 
 from ..controller_base import Controller_base
 from .controllerException import ControllerException

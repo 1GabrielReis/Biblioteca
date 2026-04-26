@@ -3,9 +3,9 @@ from fastapi.responses import Response
 
 from ..controller_base import Controller_base
 from .controllerException import ControllerException
-from ...view.view_entities.response_aluno import Response_aluno
-from ...models.service.alunoService import AlunoService
-from ...models.schemas.aluno_schema import Aluno_Schema
+from view.view_entities.response_aluno import Response_aluno
+from models.service.alunoService import AlunoService
+from models.schemas.aluno_schema import Aluno_Schema
 
 class Controller_aluno(Controller_base):
     def __init__(self):
