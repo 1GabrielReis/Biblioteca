@@ -4,10 +4,10 @@ from fastapi.responses import Response
 from ..controller_base import Controller_base
 from .controllerException import ControllerException
 
-from ...view.view_entities.response_livro import Response_livro
+from view.view_entities.response_livro import Response_livro
 
-from ...models.service.livroService import LivroService
-from ...models.schemas.livro_schema import Livro_Schema
+from models.service.livroService import LivroService
+from models.schemas.livro_schema import Livro_Schema
 
 
 

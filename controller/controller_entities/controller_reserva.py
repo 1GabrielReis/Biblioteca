@@ -4,10 +4,10 @@ from fastapi.responses import Response
 from ..controller_base import Controller_base
 from .controllerException import ControllerException
 
-from ...models.service.reservaService import ReservaService
-from ...models.schemas.reserva_Schema import Reserva_Schema
+from models.service.reservaService import ReservaService
+from models.schemas.reserva_Schema import Reserva_Schema
 
-from ...view.view_entities.response_reserva import Response_reserva
+from view.view_entities.response_reserva import Response_reserva
 
 class Controller_reserva(Controller_base):
     def __init__(self):

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 
-from ...models.service.avaliacaoService import AvaliacaoService
-from ...models.schemas.avaliacao_schema import Avaliacao_Schema
+from models.service.avaliacaoService import AvaliacaoService
+from models.schemas.avaliacao_schema import Avaliacao_Schema
 
-from ...view.view_entities.response_avaliacao import Response_avaliacao
+from view.view_entities.response_avaliacao import Response_avaliacao
 
 from ..controller_base import Controller_base
 from .controllerException import ControllerException
