@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import Response
 
 from ..controller_base import Controller_base
@@ -20,44 +20,44 @@ class Controller_livro(Controller_base):
 
     def register_routes(self):
 
-        @self.router_livro.post("/", status_code=201)
+        @self.router_livro.post("/", status_code=status.HTTP_201_CREATED, summary= 'Criar livro')
         def insert(livro: Livro_Schema):
             try:
                 novo_livro= self.service.instanceObject(livro)
                 self.service.insert(novo_livro)
                 return self.response.format(novo_livro)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao criar livro: {str(e)}")
+                raise ControllerException(status_code= status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao criar livro: {str(e)}")
 
-        @self.router_livro.put("/{id}", status_code=200)
+        @self.router_livro.put("/{id}", status_code=status.HTTP_200_OK, summary= 'Alterar livro')
         def update(id: int, livro: Livro_Schema):
             try:
                 novo_livro= self.service.instanceObject(id= id, livro= livro)
                 self.service.update(novo_livro)
                 return self.response.format(novo_livro)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao atualizar livro: {str(e)}")
+                raise ControllerException(status_code= status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao atualizar livro: {str(e)}")
 
-        @self.router_livro.delete("/{id}", status_code=204)
+        @self.router_livro.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT, summary= 'Deletar livro')
         def deleteById(id: int):
             try:
                 self.service.deleteById(id)
                 return Response(status_code=204)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao deletar livro: {str(e)}")
+                raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao deletar livro: {str(e)}")
 
-        @self.router_livro.get("/{id}", status_code=200)
+        @self.router_livro.get("/{id}", status_code=status.HTTP_200_OK, summary= "Encontra livro por ID")
         def findById(id: int):
             try:
                 livro= self.service.findById(id)
                 return self.response.format(livro)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao buscar livro: {str(e)}")
+                raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao buscar livro: {str(e)}")
 
-        @self.router_livro.get("/", status_code=200)
+        @self.router_livro.get("/", status_code=status.HTTP_200_OK, summary= "Lista livros")
         def findAll():
             try:
                 livros= self.service.findAll()
                 return self.response.format_list(livros)
             except Exception as e:
-                raise ControllerException(status_code=500, detail=f"Erro ao listar livros: {str(e)}")
+                raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao listar livros: {str(e)}")
