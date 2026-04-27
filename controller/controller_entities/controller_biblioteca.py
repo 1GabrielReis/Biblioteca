@@ -11,10 +11,10 @@ from .controllerException import ControllerException
 
 class Controller_biblioteca(Controller_base):
     def __init__(self):
+        self.router_biblioteca = APIRouter()
         super().__init__()
         self.service= BibliotecaService()
         self.response= Response_biblioteca()
-        self.router_biblioteca = APIRouter()
         self.register_routes()
 
     def register_routes(self):

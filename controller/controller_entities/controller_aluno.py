@@ -10,6 +10,7 @@ from models.schemas.aluno_schema import Aluno_Schema
 class Controller_aluno(Controller_base):
     def __init__(self):
         self.router_aluno = APIRouter()
+        super().__init__()
         self.service = AlunoService()
         self.response = Response_aluno()
         self.register_routes()

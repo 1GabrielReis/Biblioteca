@@ -13,9 +13,9 @@ from models.schemas.livro_schema import Livro_Schema
 
 class Controller_livro(Controller_base):
     def __init__(self):
+        self.router_livro = APIRouter()
         self.service= LivroService()
         self.response= Response_livro()
-        self.router_livro = APIRouter()
         self.register_routes()
 
     def register_routes(self):

@@ -11,10 +11,10 @@ from .controllerException import ControllerException
 
 class Controller_avaliacao(Controller_base):
     def __init__(self):
+        self.router_avaliacao= APIRouter()
         super().__init__()
         self.service= AvaliacaoService()
         self.response= Response_avaliacao()
-        self.router_avaliacao= APIRouter()
         self.register_routes()
 
     def register_routes(self):

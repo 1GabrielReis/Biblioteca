@@ -11,10 +11,10 @@ from view.view_entities.response_reserva import Response_reserva
 
 class Controller_reserva(Controller_base):
     def __init__(self):
+        self.router_reserva = APIRouter()
         super().__init__()
         self.service= ReservaService()
         self.response = Response_reserva()
-        self.router_reserva = APIRouter()
         self.register_routes()
 
     def register_routes(self):
