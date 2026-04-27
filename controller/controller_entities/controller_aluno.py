@@ -18,7 +18,7 @@ class Controller_aluno(Controller_base):
     def register_routes(self):
 
         @self.router_aluno.get("/", status_code= status.HTTP_200_OK , summary= "Lista todos os aluno")
-        def listar_alunos():
+        def findAll():
             try:
                 alunos = self.service.findAll()
                 if not alunos:
@@ -28,7 +28,7 @@ class Controller_aluno(Controller_base):
                 raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao listar alunos: {str(e)}")
 
         @self.router_aluno.get("/{id}", status_code=status.HTTP_200_OK, summary= "Encontra aluno por ID")
-        def buscar_aluno(id: int):
+        def findById(id: int):
             try:
                 aluno = self.service.findById(id)
                 if not aluno:
@@ -38,7 +38,7 @@ class Controller_aluno(Controller_base):
                 raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao buscar aluno: {str(e)}")
 
         @self.router_aluno.post("/", status_code=status.HTTP_201_CREATED, summary= "Criar aluno")
-        def criar_aluno(aluno: Aluno_Schema):
+        def insert(aluno: Aluno_Schema):
             try:
                 novo_aluno= self.service.instanceObject(aluno)
                 self.service.insert(novo_aluno)
@@ -47,7 +47,7 @@ class Controller_aluno(Controller_base):
                 raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao criar aluno: {str(e)}")
 
         @self.router_aluno.put("/{id}", status_code=status.HTTP_200_OK, summary= 'Alterar Aluno')
-        def atualizar_aluno(id: int, aluno: Aluno_Schema):
+        def update(id: int, aluno: Aluno_Schema):
             try:
                 aluno_obj= self.service.instanceObject(id=id, aluno=aluno)
                 aluno_atualizado = self.service.update(aluno_obj)
@@ -56,7 +56,7 @@ class Controller_aluno(Controller_base):
                 raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao atualizar aluno: {str(e)}")
 
         @self.router_aluno.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT, summary= 'Deletar Aluno')
-        def deletar_aluno(id: int):
+        def deleteById(id: int):
             try:
                 self.service.deleteById(id)
                 return Response(status_code=204)
