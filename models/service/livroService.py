@@ -36,6 +36,12 @@ class LivroService(LivroDao):
             return self.livroDao.findById(id)
         except Exception as e:
             raise ServiceException(f"Erro ao buscar livro com ID {id}.\nDetalhes: {e}")
+    
+    def findByTitle(self, titulo: str) -> List[Livro]:
+        try:
+            return self.livroDao.findByTitle(titulo)
+        except Exception as e:
+            raise ServiceException(f"Erro ao buscar livros. \nDetalhes: {e}")
 
     def findAll(self) -> List[Livro]:
         try:

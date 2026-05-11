@@ -74,11 +74,24 @@ class LivroDaoSL3(LivroDao):
             else:
                 return None
         except sql.Error as erro:
-            raise DbException(f"Erro ao buscar aluno. \nDetalhes: {erro}")
+            raise DbException(f"Erro ao buscar livro. \nDetalhes: {erro}")
         finally:
             DB.closeCursor(cursor)
 
-    
+    def findByTitle(self,titulo: str) -> List[Livro]:
+        cursor = None
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute('''SELECT * FROM livros WHERE titulo LIKE ?''',(f'%{titulo}%',))
+            resultSetList = cursor.fetchall()
+            if resultSetList:
+                return [self._instaciaLivro(resultSet) for resultSet in resultSetList]
+            return []
+        except sql.Error as erro:
+            raise DbException(f"Erro ao buscar livro. \nDetalhes: {erro}")
+        finally:
+            DB.closeCursor(cursor)
+
     def findAll(self)-> List[Livro]:
         cursor=None
         try:
@@ -93,8 +106,7 @@ class LivroDaoSL3(LivroDao):
             raise DbException(f"Erro ao buscar todos os livros. \nDetalhes: {erro}")
         finally:
             DB.closeCursor(cursor)
-
-
+    
 
     def _instaciaLivro(self,resultSet) -> Livro:
         livro= Livro(resultSet[0],resultSet[1],resultSet[2],resultSet[3])

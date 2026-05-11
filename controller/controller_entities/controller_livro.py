@@ -46,11 +46,20 @@ class Controller_livro(Controller_base):
             except Exception as e:
                 raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao deletar livro: {str(e)}")
 
-        @self.router_livro.get("/{id}", status_code=status.HTTP_200_OK, summary= "Encontra livro por ID")
+        @self.router_livro.get("/id/{id}", status_code=status.HTTP_200_OK, summary= "Encontra livro por ID")
         def findById(id: int):
             try:
                 livro= self.service.findById(id)
                 return self.response.format(livro)
+            except Exception as e:
+                raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao buscar livro: {str(e)}")
+
+        @self.router_livro.get("/titulo/{titulo}", status_code=status.HTTP_200_OK, summary= "Encontra livro por Titulo")
+        def findByTitle(titulo: str):
+            try:
+                livros= self.service.findByTitle(titulo)
+                print(livros)
+                return self.response.format_list(livros)
             except Exception as e:
                 raise ControllerException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Erro ao buscar livro: {str(e)}")
 
