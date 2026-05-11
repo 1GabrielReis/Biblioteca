@@ -21,5 +21,9 @@ class LivroDao(ABC):
         pass
 
     @abstractmethod
+    def findByTitle(self,titulo: str) -> List[Livro]:
+        pass
+
+    @abstractmethod
     def findAll(self,livro) -> List[Livro]:
         pass
