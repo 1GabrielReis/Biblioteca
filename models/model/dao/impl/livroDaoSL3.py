@@ -82,7 +82,7 @@ class LivroDaoSL3(LivroDao):
         cursor = None
         try:
             cursor = self.conn.cursor()
-            cursor.execute('''SELECT * FROM livros WHERE titulo LIKE ?''',(f'%{titulo}%',))
+            cursor.execute('''SELECT * FROM livros WHERE titulo LIKE ? COLLATE NOCASE''',(f'%{titulo}%',))
             resultSetList = cursor.fetchall()
             if resultSetList:
                 return [self._instaciaLivro(resultSet) for resultSet in resultSetList]
